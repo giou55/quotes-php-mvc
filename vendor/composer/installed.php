@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '7e7462dea0ec48818e4571d0ed9aa2ccc0e2cfaf',
+    'reference' => '155974e4eb6f353e588bb8dd5d322d79c329133a',
     'name' => 'g.giourmetakis/quotes-php-mvc',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '7e7462dea0ec48818e4571d0ed9aa2ccc0e2cfaf',
+      'reference' => '155974e4eb6f353e588bb8dd5d322d79c329133a',
     ),
   ),
 );

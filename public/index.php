@@ -1,7 +1,7 @@
 <?php
 
 use app\Router;
-use app\controllers\ProductController;
+use app\controllers\QuoteController;
 
 require_once __DIR__.'/../vendor/autoload.php';
 

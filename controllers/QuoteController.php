@@ -9,7 +9,7 @@ class QuoteController {
     public static function index(Router $router) {
         $search = $_GET['search'] ?? '';
         $quotes = $router->db->getQuotes($search);
-        $router->renderView('products/index', [
+        $router->renderView('quotes/index', [
             'quotes' => $quotes,
             'search' => $search
         ]);
@@ -33,7 +33,7 @@ class QuoteController {
                 exit;
             }
         }
-        $router->renderView('products/create', [
+        $router->renderView('quotes/create', [
             'product' => $quoteData,
             'errors' => $errors
         ]);

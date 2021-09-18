@@ -17,10 +17,10 @@ class Database {
 
     public function getQuotes($keyword = '') {
         if ($keyword) {
-            $statement = $this->pdo->prepare('SELECT * FROM products WHERE title like :keyword ORDER BY create_date DESC');
+            $statement = $this->pdo->prepare('SELECT * FROM quotes WHERE body like :keyword ORDER BY create_date DESC');
             $statement->bindValue(":keyword", "%$keyword%");
         } else {
-            $statement = $this->pdo->prepare('SELECT * FROM products ORDER BY create_date DESC');
+            $statement = $this->pdo->prepare('SELECT * FROM quotes ORDER BY create_date DESC');
         }
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
