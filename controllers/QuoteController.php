@@ -45,7 +45,7 @@ class QuoteController {
             header('Location: /quotes');
             exit;
         }
-        $productData = $router->db->getProductById($id);
+        $productData = $router->db->getQuoteById($id);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $productData['title'] = $_POST['title'];

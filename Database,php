@@ -49,9 +49,9 @@ class Database {
             "UPDATE products SET title = :title, 
             image = :image, description = :description, price = :price WHERE id = :id"
         );
-        $statement->bindValue(':title', $product->title);
-        $statement->bindValue(':description', $product->description);
-        $statement->bindValue(':id', $product->id);
+        $statement->bindValue(':title', $quote->title);
+        $statement->bindValue(':description', $quote->description);
+        $statement->bindValue(':id', $quote->id);
         $statement->execute();
     }
 
