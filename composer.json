@@ -1,0 +1,10 @@
+{
+    "name": "g.giourmetakis/quotes-php-mvc",
+    "authors": [
+        {
+            "name": "Giorgos Giourmetakis",
+            "email": "giorgosggg@gmail.com"
+        }
+    ],
+    "require": {}
+}
