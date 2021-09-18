@@ -1,4 +1,4 @@
-<h1>Qoutes</h1>
+<h1>Ευφυολογήματα, Σοφά Λόγια, Αποφθέγματα</h1>
 
 <p>
     <a href="/products/create" type="button" class="btn btn-sm btn-success">Add new Quote</a>
@@ -33,9 +33,8 @@
     <?php } ?>
 </table>
 
-<!-- The Modal -->
+
 <div id="myModal" class="modal">
-    <!-- Modal content -->
     <div class="modal-content">
         <span class="close">&times;</span>
         <h1>Επεξεργασία</h1>
