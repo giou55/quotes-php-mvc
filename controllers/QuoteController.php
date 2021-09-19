@@ -9,8 +9,10 @@ class QuoteController {
     public static function index(Router $router) {
         $search = $_GET['search'] ?? '';
         $quotes = $router->db->getQuotes($search);
+        $authors = $router->db->getAuthors();
         $router->renderView('quotes/index', [
             'quotes' => $quotes,
+            'authors' => $authors,
             'search' => $search
         ]);
     }

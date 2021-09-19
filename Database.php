@@ -61,4 +61,10 @@ class Database {
         return $statement->execute();
     }
 
+    public function getAuthors() {
+        $statement = $this->pdo->prepare('SELECT * FROM author ORDER BY name DESC');
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

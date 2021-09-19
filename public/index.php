@@ -2,6 +2,7 @@
 
 use app\Router;
 use app\controllers\QuoteController;
+use app\controllers\AuthorController;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
@@ -14,5 +15,7 @@ $router->post('/quotes/create', [QuoteController::class, 'create']);
 $router->get('/quotes/update', [QuoteController::class, 'update']);
 $router->post('/quotes/update', [QuoteController::class, 'update']);
 $router->post('/quotes/delete', [QuoteController::class, 'delete']);
+
+$router->get('/authors', [AuthorController::class, 'index']);
 
 $router->resolve();
