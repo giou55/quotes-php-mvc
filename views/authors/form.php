@@ -8,10 +8,16 @@
 
 <form method="post">
     <div class="form-group">
-        <input  type="text" name="name" value="<?php echo $author['name'] ?>"/>
+        <label>Όνομα</label>
+        <input type="text" class="form-control" name="name" value="<?php echo $author['name'] ?>"/>
     </div>
     <div class="form-group">
-        <input  type="text" name="name" value="<?php echo $author['role'] ?>"/>
+        <label>keyword</label>
+        <input type="text" class="form-control" name="name" value="<?php echo $author['keyword'] ?>"/>
+    </div>
+    <div class="form-group">
+        <label>Ιδιότητα</label>
+        <input type="text" class="form-control" name="name" value="<?php echo $author['role'] ?>"/>
     </div>
     <button type="submit" class="btn btn-primary">Αποθήκευση</button>
 </form>

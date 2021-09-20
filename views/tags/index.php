@@ -1,14 +1,50 @@
-<div class="d-flex flex-row justify-content-start">
-    <h1>Tags</h1> 
-    <button
-        class="btn btn-sm btn-primary"
-        onclick="document.getElementById('tagModal').style.display = 'block'"
-    >Νέο Tag
+<div class="d-flex flex-row justify-content-start align-items-center mb-4">
+    <h3 class="mr-3">Tags</h3> 
+    <div>
+        <button class="btn btn-sm btn-primary"
+                onclick="document.getElementById('tagModal').style.display = 'block'"
+    >
+        Νέο Tag
     </button>
+    </div>
 </div>
 
+
+<table class="table table-striped table-sm">
+    <?php foreach ($tags as $i => $tag) { ?>
+        <tr>
+            <th scope="row"><?php echo $i + 1 ?></th>
+            <td><?php echo $tag['title'] ?></td>
+            <td>
+                <button class="btn btn-sm btn-outline-primary"
+                        onclick="document.getElementById('editModal<?php echo $tag['id'] ?>')
+                        .style.display = 'block'"
+                >
+                    Edit
+                </button>
+                <form method="post" action="/tags/delete" style="display: inline-block">
+                    <input  type="hidden" name="id" value="<?php echo $tag['id'] ?>"/>
+                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+    <?php } ?>
+</table>
+
+
 <?php foreach ($tags as $i => $tag) { ?>
-    <p><?php echo $tag['title'] ?></p>
+    <div id="editModal<?php echo $tag['id'] ?>" class="modal">
+        <div class="modal-content">
+            <span class="close"
+                  onclick="document.getElementById('editModal<?php echo $tag['id'] ?>')
+                        .style.display = 'none'"
+                        >
+                            &times;
+            </span>
+            <h4>Επεξεργασία</h4>
+            <?php include "form.php"; ?>
+        </div>
+    </div>
 <?php } ?>
 
 
@@ -19,12 +55,11 @@
             >
                 &times;
             </span>
-            <h1>Νέο Tag</h1>
+            <h4>Νέο Tag</h4>
 
-            <form method="post" action="/tags/create">
+            <form method="post">
                 <div class="form-group">
-                    <label>Τίτλος</label>
-                    <input type="text" class="form-control" name="name"></input>
+                    <input type="text" class="form-control" name="title"></input>
                 </div>
                 <button type="submit" class="btn btn-primary">Αποθήκευση</button>
             </form>

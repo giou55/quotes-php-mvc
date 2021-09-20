@@ -4,6 +4,7 @@ namespace app;
 
 use PDO;
 use app\models\Quote;
+use app\models\Tag;
 
 class Database {
     public \PDO $pdo;
@@ -46,7 +47,7 @@ class Database {
 
     public function updateQuote(Quote $quote) {
         $statement = $this->pdo->prepare(
-            "UPDATE products SET title = :title, 
+            "UPDATE quotes SET title = :title, 
             image = :image, description = :description, price = :price WHERE id = :id"
         );
         $statement->bindValue(':title', $quote->title);
@@ -71,6 +72,30 @@ class Database {
         $statement = $this->pdo->prepare('SELECT * FROM tags ORDER BY title DESC');
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function createTag(Tag $tag) {
+        $statement = $this->pdo->prepare(
+            "INSERT INTO tags (title)
+            VALUES (:title)"
+        );
+        $statement->bindValue(':title', $tag->title);
+        $statement->execute();
+    }
+
+    public function updateTag(Tag $tag) {
+        $statement = $this->pdo->prepare(
+            "UPDATE tags SET title = :title WHERE id = :id"
+        );
+        $statement->bindValue(':title', $tag->title);
+        $statement->bindValue(':id', $tag->id);
+        $statement->execute();
+    }
+
+    public function deleteTag($id) {
+        $statement = $this->pdo->prepare('DELETE FROM tags WHERE id = :id');
+        $statement->bindValue(':id', $id);
+        return $statement->execute();
     }
 
 }

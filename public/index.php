@@ -20,6 +20,8 @@ $router->post('/quotes/delete', [QuoteController::class, 'delete']);
 $router->get('/authors', [AuthorController::class, 'index']);
 
 $router->get('/tags', [TagController::class, 'index']);
+$router->post('/tags', [TagController::class, 'index']);
+$router->post('/tags/delete', [TagController::class, 'delete']);
 
 
 $router->resolve();

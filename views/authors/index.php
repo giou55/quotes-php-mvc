@@ -1,13 +1,25 @@
-<div class="d-flex flex-row justify-content-start">
-    <h1>Πρόσωπα</h1> 
-    <button
-        class="btn btn-sm btn-primary"
-        onclick="document.getElementById('authorModal').style.display = 'block'"
-    >Νέο Πρόσωπο
+<div class="d-flex flex-row justify-content-start align-items-center mb-4">
+    <h3 class="mr-3">Πρόσωπα</h3> 
+    <div>
+        <button class="btn btn-sm btn-primary"
+                onclick="document.getElementById('authorModal').style.display = 'block'"
+    >
+        Νέο Πρόσωπο
     </button>
+    </div>
 </div>
 
-<table class="table">
+<table class="table table-sm">
+        <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Όνομα</th>
+        <th scope="col">Keyword</th>
+        <th scope="col">Ιδιότητα</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
     <?php foreach ($authors as $i => $author) { ?>
         <tr>
             <th scope="row"><?php echo $i + 1 ?></th>
@@ -28,6 +40,7 @@
             </td>
         </tr>
     <?php } ?>
+    </tbody>
 </table>
 
 <?php foreach ($authors as $i => $author) { ?>
@@ -39,7 +52,7 @@
                         >
                             &times;
             </span>
-            <h1>Επεξεργασία</h1>
+            <h4>Επεξεργασία</h4>
             <?php include "form.php"; ?>
         </div>
     </div>
@@ -52,12 +65,16 @@
             >
                 &times;
             </span>
-            <h1>Νέο Πρόσωπο</h1>
+            <h4>Νέο Πρόσωπο</h4>
 
             <form method="post" action="/authors/create">
                 <div class="form-group">
                     <label>Όνομα</label>
                     <input type="text" class="form-control" name="name"></input>
+                </div>
+                <div class="form-group">
+                    <label>keyword</label>
+                    <input type="text" class="form-control" name="keyword"></input>
                 </div>
                 <div class="form-group">
                     <label>Ιδιότητα</label>
