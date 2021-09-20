@@ -8,8 +8,10 @@
 
 <form method="post">
     <div class="form-group">
-        <textarea class="form-control" name="title"><?php echo $author['name'] ?>
-        </textarea>
+        <input  type="text" name="name" value="<?php echo $author['name'] ?>"/>
+    </div>
+    <div class="form-group">
+        <input  type="text" name="name" value="<?php echo $author['role'] ?>"/>
     </div>
     <button type="submit" class="btn btn-primary">Αποθήκευση</button>
 </form>

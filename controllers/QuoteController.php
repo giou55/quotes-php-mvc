@@ -20,12 +20,10 @@ class QuoteController {
     public static function create(Router $router) {
         $errors = [];
         $quoteData = [
-            'title' => '',
-            'description' => '',
+            'body' => '',
         ];
         if ($_SERVER['REQUEST_METHOD'] === "POST") {
-            $quoteData['title'] = $_POST['title'];
-            $quoteData['description'] = $_POST['description'];
+            $quoteData['body'] = $_POST['body'];
 
             $quote = new Quote();
             $quote->load($quoteData);
@@ -36,32 +34,32 @@ class QuoteController {
             }
         }
         $router->renderView('quotes/create', [
-            'product' => $quoteData,
+            'quote' => $quoteData,
             'errors' => $errors
         ]);
     }
 
    public static function update(Router $router) {
-        $id = $_GET['id'] ?? null;
-        if (!$id) {
-            header('Location: /quotes');
-            exit;
-        }
-        $quoteData = $router->db->getQuoteById($id);
+        // $id = $_GET['id'] ?? null;
+        // if (!$id) {
+        //     header('Location: /quotes');
+        //     exit;
+        // }
+        // $quoteData = $router->db->getQuoteById($id);
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $quoteData['title'] = $_POST['title'];
-            $quoteData['description'] = $_POST['description'];
+        // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $quoteData['body'] = $_POST['body'];
+            // $quoteData['author_id'] = $_POST['author_id'];
 
             $quote = new Quote();
             $quote->load($quoteData);
             $quote->save();
             header('Location: /quotes');
             exit;
-        }
-        $router->renderView('quotes/update', [
-            'quote' => $quoteData
-        ]);
+        // }
+        // $router->renderView('quotes', [
+        //     'quote' => $quoteData
+        // ]);
     }
 
     public static function delete(Router $router) {

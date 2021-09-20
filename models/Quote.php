@@ -8,11 +8,13 @@ class Quote {
     public ?int $id = null; 
     public ?string $body = null; 
     public ?string $author_id = null; 
+    public ?string $author_name = null; 
 
     public function load($data) {
         $this->id = $data['id'] ?? null;
         $this->body = $data['body'];
         $this->author_id = $data['author_id'] ?? null;
+        $this->author_name = $data['author_name'] ?? null;
     }
 
     public function save() {

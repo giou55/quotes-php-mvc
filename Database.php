@@ -27,7 +27,7 @@ class Database {
     }
 
     public function getQuoteById($id) {
-        $statement = $this->pdo->prepare('SELECT * FROM products WHERE id = :id');
+        $statement = $this->pdo->prepare('SELECT * FROM quotes WHERE id = :id');
         $statement->bindValue(':id', $id);
         $statement->execute();
         return $statement->fetch(PDO::FETCH_ASSOC);
