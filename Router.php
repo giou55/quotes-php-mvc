@@ -3,7 +3,8 @@
 namespace app;
 
 use app\controllers\QuoteController;
-
+use app\controllers\AuthorController;
+use app\controllers\TagController;
 class Router {
     public array $getRoutes = [];
     public array $postRoutes = [];
@@ -31,8 +32,19 @@ class Router {
            $fn = $this->postRoutes[$currentUrl][1] ?? null;
        } 
 
-       if ($fn) {
+        // echo '<pre>';
+        // var_dump($currentUrl);
+        // echo '</pre>';
+        // exit;
+
+       if ($fn && $currentUrl === '/quotes') {
             $qc = new QuoteController();
+            call_user_func(array($qc, $fn), $this);
+       } elseif ($fn && $currentUrl === '/authors') {
+           $qc = new AuthorController();
+            call_user_func(array($qc, $fn), $this);
+       } elseif ($fn && $currentUrl === '/tags') {
+           $qc = new TagController();
             call_user_func(array($qc, $fn), $this);
        } else {
            echo "Page not found";

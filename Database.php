@@ -67,4 +67,10 @@ class Database {
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getTags() {
+        $statement = $this->pdo->prepare('SELECT * FROM tags ORDER BY title DESC');
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

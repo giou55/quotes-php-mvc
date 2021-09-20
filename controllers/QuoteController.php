@@ -47,20 +47,20 @@ class QuoteController {
             header('Location: /quotes');
             exit;
         }
-        $productData = $router->db->getQuoteById($id);
+        $quoteData = $router->db->getQuoteById($id);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $productData['title'] = $_POST['title'];
-            $productData['description'] = $_POST['description'];
+            $quoteData['title'] = $_POST['title'];
+            $quoteData['description'] = $_POST['description'];
 
-            $product = new Quote();
-            $product->load($productData);
-            $product->save();
+            $quote = new Quote();
+            $quote->load($quoteData);
+            $quote->save();
             header('Location: /quotes');
             exit;
         }
         $router->renderView('quotes/update', [
-            'product' => $productData
+            'quote' => $quoteData
         ]);
     }
 
@@ -70,7 +70,6 @@ class QuoteController {
             header('Location: /quotes');
             exit;
         }
-
         if ($router->db->deleteQuote($id)) {
             header('Location: /quotes');
             exit;

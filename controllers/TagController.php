@@ -4,13 +4,13 @@ namespace app\controllers;
 
 use app\Router;
 
-class AuthorController {
+class TagController {
     public static function index(Router $router) {
         $search = $_GET['search'] ?? '';
         // $authors = $router->db->getAuthors($search);
-        $authors = $router->db->getAuthors();
-        $router->renderView('authors/index', [
-            'authors' => $authors,
+        $tags = $router->db->getTags();
+        $router->renderView('tags/index', [
+            'tags' => $tags,
             'search' => $search
         ]);
     }

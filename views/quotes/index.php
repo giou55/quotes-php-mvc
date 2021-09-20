@@ -1,20 +1,3 @@
-<h1>Ευφυολογήματα, Σοφά Λόγια, Αποφθέγματα</h1>
-
-<p>
-    <a href="/quotes/create" type="button" class="btn btn-sm btn-success">Νέο Απόφθεγμα</a>
-    <a href="" type="button" class="btn btn-sm btn-success">Authors</a>
-    <a href="" type="button" class="btn btn-sm btn-success">Tags</a>
-</p>
-
-<form action="" method="get">
-    <div class="input-group mb-3">
-      <input type="text" name="search" class="form-control" placeholder="Search for quotes..." value="<?php echo $search ?>">
-      <div class="input-group-append">
-        <button class="btn btn-success" type="submit">Search</button>
-      </div>
-    </div>
-</form>
-
 <table class="table">
     <?php foreach ($quotes as $i => $quote) { ?>
         <tr>
