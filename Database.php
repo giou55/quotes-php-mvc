@@ -5,6 +5,7 @@ namespace app;
 use PDO;
 use app\models\Quote;
 use app\models\Tag;
+use app\models\Author;
 
 class Database {
     public \PDO $pdo;
@@ -66,6 +67,35 @@ class Database {
         $statement = $this->pdo->prepare('SELECT * FROM author ORDER BY name DESC');
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function createAuthor(Author $author) {
+        $statement = $this->pdo->prepare(
+            "INSERT INTO author (name, keyword, role)
+            VALUES (:name, :keyword, :role)"
+        );
+        $statement->bindValue(':name', $author->name);
+        $statement->bindValue(':keyword', $author->keyword);
+        $statement->bindValue(':role', $author->role);
+        $statement->execute();
+    }
+
+    public function updateAuthor(Author $author) {
+        $statement = $this->pdo->prepare(
+            "UPDATE author SET name = :name, keyword = :keyword, role = :role 
+            WHERE id = :id"
+        );
+        $statement->bindValue(':name', $author->name);
+        $statement->bindValue(':keyword', $author->keyword);
+        $statement->bindValue(':role', $author->role);
+        $statement->bindValue(':id', $author->id);
+        $statement->execute();
+    }
+
+    public function deleteAuthor($id) {
+        $statement = $this->pdo->prepare('DELETE FROM author WHERE id = :id');
+        $statement->bindValue(':id', $id);
+        return $statement->execute();
     }
 
     public function getTags() {

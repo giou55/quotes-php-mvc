@@ -42,7 +42,7 @@
                             &times;
             </span>
             <h4>Επεξεργασία</h4>
-            <?php include "form.php"; ?>
+            <?php include "edit_form.php"; ?>
         </div>
     </div>
 <?php } ?>
@@ -57,7 +57,7 @@
             </span>
             <h4>Νέο Tag</h4>
 
-            <form method="post">
+            <form method="post" action="/tags/create">
                 <div class="form-group">
                     <input type="text" class="form-control" name="title"></input>
                 </div>

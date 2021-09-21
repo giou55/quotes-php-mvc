@@ -31,19 +31,13 @@ class Router {
        } else {
            $fn = $this->postRoutes[$currentUrl][1] ?? null;
        } 
-
-        // echo '<pre>';
-        // var_dump($currentUrl);
-        // echo '</pre>';
-        // exit;
-
-       if ($fn && $currentUrl === '/quotes') {
+       if ($fn && strpos($currentUrl, 'quotes')) {
             $qc = new QuoteController();
             call_user_func(array($qc, $fn), $this);
-       } elseif ($fn && $currentUrl === '/authors') {
+       } elseif ($fn && strpos($currentUrl, 'authors')) {
            $qc = new AuthorController();
             call_user_func(array($qc, $fn), $this);
-       } elseif ($fn && $currentUrl === '/tags') {
+       } elseif ($fn && strpos($currentUrl, 'tags')) {
            $qc = new TagController();
             call_user_func(array($qc, $fn), $this);
        } else {

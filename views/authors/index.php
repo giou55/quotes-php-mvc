@@ -53,7 +53,7 @@
                             &times;
             </span>
             <h4>Επεξεργασία</h4>
-            <?php include "form.php"; ?>
+            <?php include "edit_form.php"; ?>
         </div>
     </div>
 <?php } ?>

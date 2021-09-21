@@ -2,3 +2,35 @@ echo '<pre>';
 var_dump($var);
 echo '</pre>';
 exit;
+
+
+array(4) {
+  ["/"]=>
+  array(2) {
+    [0]=>
+    string(33) "app\controllers\ProductController"
+    [1]=>
+    string(5) "index"
+  }
+  ["/products"]=>
+  array(2) {
+    [0]=>
+    string(33) "app\controllers\ProductController"
+    [1]=>
+    string(5) "index"
+  }
+  ["/products/create"]=>
+  array(2) {
+    [0]=>
+    string(33) "app\controllers\ProductController"
+    [1]=>
+    string(6) "create"
+  }
+  ["/products/update"]=>
+  array(2) {
+    [0]=>
+    string(33) "app\controllers\ProductController"
+    [1]=>
+    string(6) "update"
+  }
+}
