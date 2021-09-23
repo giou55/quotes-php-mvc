@@ -37,28 +37,32 @@ class Database {
 
     public function createQuote(Quote $quote) {
         $statement = $this->pdo->prepare(
-            "INSERT INTO quotes (title, image, description, price, create_date)
-            VALUES (:title, :image, :description, :price, :date)"
+            "INSERT INTO quotes (body, author_id, author_name, author_role)
+            VALUES (:body, :author_id, :author_name, :author_role)"
         );
-        $statement->bindValue(':title', $quote->title);
-        $statement->bindValue(':description', $quote->description);
-        $statement->bindValue(':date', date('Y-m-d H:i:s'));
+        $statement->bindValue(':body', $quote->body);
+        $statement->bindValue(':author_id', $quote->author_id);
+        $statement->bindValue(':author_name', $quote->author_name);
+        $statement->bindValue(':author_role', $quote->author_role);
         $statement->execute();
     }
 
     public function updateQuote(Quote $quote) {
         $statement = $this->pdo->prepare(
-            "UPDATE quotes SET title = :title, 
-            image = :image, description = :description, price = :price WHERE id = :id"
+            "UPDATE quotes SET body = 
+            :body, author_id = :author_id, author_name = :author_name, author_role = :author_role 
+            WHERE id = :id"
         );
-        $statement->bindValue(':title', $quote->title);
-        $statement->bindValue(':description', $quote->description);
+        $statement->bindValue(':body', $quote->body);
+        $statement->bindValue(':author_id', $quote->author_id);
+        $statement->bindValue(':author_name', $quote->author_name);
+        $statement->bindValue(':author_role', $quote->author_role);
         $statement->bindValue(':id', $quote->id);
         $statement->execute();
     }
 
     public function deleteQuote($id) {
-        $statement = $this->pdo->prepare('DELETE FROM products WHERE id = :id');
+        $statement = $this->pdo->prepare('DELETE FROM quotes WHERE id = :id');
         $statement->bindValue(':id', $id);
         return $statement->execute();
     }

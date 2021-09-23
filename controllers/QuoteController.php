@@ -21,45 +21,61 @@ class QuoteController {
         $errors = [];
         $quoteData = [
             'body' => '',
+            'author_id' => '',
+            'author_name' => '',
+            'author_role' => ''
         ];
-        if ($_SERVER['REQUEST_METHOD'] === "POST") {
-            $quoteData['body'] = $_POST['body'];
 
-            $quote = new Quote();
-            $quote->load($quoteData);
-            $errors = $quote->save();
-            if (empty($errors)) {
-                header('Location: /quotes');
-                exit;
-            }
+        $authorData = explode('&', $_POST['author']);
+        $author_id = $authorData[0];
+        $author_name = $authorData[1];
+        $author_role = $authorData[2];
+
+        $quoteData['author_id'] = $author_id;
+        $quoteData['author_name'] = $author_name;
+        $quoteData['author_role'] = $author_role;
+        $quoteData['body'] = $_POST['body'];
+
+        $quote = new Quote();
+        $quote->load($quoteData);
+        $errors = $quote->save();
+        if (empty($errors)) {
+            header('Location: /quotes');
+            exit;
         }
-        $router->renderView('quotes/create', [
-            'quote' => $quoteData,
-            'errors' => $errors
-        ]);
     }
 
    public static function update(Router $router) {
-        // $id = $_GET['id'] ?? null;
-        // if (!$id) {
-        //     header('Location: /quotes');
-        //     exit;
-        // }
-        // $quoteData = $router->db->getQuoteById($id);
-
-        // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $quoteData['body'] = $_POST['body'];
-            // $quoteData['author_id'] = $_POST['author_id'];
-
-            $quote = new Quote();
-            $quote->load($quoteData);
-            $quote->save();
+        $id = $_POST['id'] ?? null;
+        if (!$id) {
             header('Location: /quotes');
             exit;
-        // }
-        // $router->renderView('quotes', [
-        //     'quote' => $quoteData
-        // ]);
+        }
+
+        $quoteData = [
+            'id' => '',
+            'body' => '',
+            'author_id' => '',
+            'author_name' => '',
+            'author_role' => ''
+        ];
+
+        $authorData = explode('&',$_POST['author']);
+        $author_id = $authorData[0];
+        $author_name = $authorData[1];
+        $author_role = $authorData[2];
+
+        $quoteData['id'] = $id;
+        $quoteData['author_id'] = $author_id;
+        $quoteData['author_name'] = $author_name;
+        $quoteData['author_role'] = $author_role;
+        $quoteData['body'] = $_POST['body'];
+
+        $quote = new Quote();
+        $quote->load($quoteData);
+        $quote->save();
+        header('Location: /quotes');
+        exit;
     }
 
     public static function delete(Router $router) {

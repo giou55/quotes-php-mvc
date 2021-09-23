@@ -14,10 +14,10 @@
     </div>
     <div class="form-group">
         <select class="form-control" name="author">
-            <option value="<?php echo $quote['author_name'] ?>" selected><?php echo $quote['author_name'] ?>
+            <option value="<?php echo $quote['author_id'].'&'.$quote['author_name'].'&'.$quote['author_role'] ?>" selected><?php echo $quote['author_name'] ?>
             </option>
             <?php foreach ($authors as $author): ?>
-                <option value="<?php echo $author['name'] ?>">
+                <option value="<?php echo $author['id'].'&'.$author['name'].'&'.$author['role'] ?>">
                     <?php echo $author['name'] ?>
                 </option>
             <?php endforeach; ?>
