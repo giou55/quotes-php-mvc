@@ -59,7 +59,7 @@
 
             <form method="post" action="/tags/create">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="title"></input>
+                    <input type="text" class="form-control" name="title" required maxlength="20"></input>
                 </div>
                 <button type="submit" class="btn btn-primary">Αποθήκευση</button>
             </form>

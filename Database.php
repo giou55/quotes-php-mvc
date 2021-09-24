@@ -35,6 +35,13 @@ class Database {
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function getQuotesByAuthorId($author_id) {
+        $statement = $this->pdo->prepare('SELECT * FROM quotes WHERE author_id = :author_id');
+        $statement->bindValue(':author_id', $author_id);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function createQuote(Quote $quote) {
         $statement = $this->pdo->prepare(
             "INSERT INTO quotes (body, author_id, author_name, author_role)
@@ -58,6 +65,18 @@ class Database {
         $statement->bindValue(':author_name', $quote->author_name);
         $statement->bindValue(':author_role', $quote->author_role);
         $statement->bindValue(':id', $quote->id);
+        $statement->execute();
+    }
+
+    public function updateQuoteInAuthorDetails($quote, Author $author) {
+        $statement = $this->pdo->prepare(
+            "UPDATE quotes SET author_id = :author_id, author_name = :author_name, author_role = :author_role 
+            WHERE id = :id"
+        );
+        $statement->bindValue(':author_id', $author->id);
+        $statement->bindValue(':author_name', $author->name);
+        $statement->bindValue(':author_role', $author->role);
+        $statement->bindValue(':id', $quote['id']);
         $statement->execute();
     }
 

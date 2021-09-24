@@ -12,7 +12,6 @@
 <table class="table table-sm">
     <?php foreach ($quotes as $i => $quote) { ?>
         <tr>
-            <th scope="row"><?php echo $i + 1 ?></th>
             <td><?php echo $quote['body'] ?></td>
             <td><?php echo $quote['author_name'] ?></td>
             <td><?php echo $quote['author_role'] ?></td>
@@ -56,12 +55,19 @@
                             &times;
             </span>
             <h4>Νέο Απόφθεγμα</h4>
+            <?php
+                echo '<pre>';
+                
+                if (isset($errors)) var_dump($errors);
+                echo '</pre>';
+            ?>
+
             <form method="post" action="/quotes/create">
               <div class="form-group">
-                <textarea class="form-control" name="body"></textarea>
+                <textarea class="form-control" name="body" required maxlength="200"></textarea>
               </div>
               <div class="form-group">
-                  <select class="form-control" name="author">
+                  <select class="form-control" name="author" required>
                       <option value="" selected>
                       </option>
                       <?php foreach ($authors as $author): ?>

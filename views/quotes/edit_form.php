@@ -9,11 +9,11 @@
 <form method="post" action="/quotes/update">
     <input type="hidden" name="id" value="<?php echo $quote['id'] ?>"/>
     <div class="form-group">
-        <textarea class="form-control" name="body"><?php echo $quote['body'] ?>
+        <textarea class="form-control" name="body" required maxlength="200"><?php echo $quote['body'] ?>
         </textarea>
     </div>
     <div class="form-group">
-        <select class="form-control" name="author">
+        <select class="form-control" name="author" required>
             <option value="<?php echo $quote['author_id'].'&'.$quote['author_name'].'&'.$quote['author_role'] ?>" selected><?php echo $quote['author_name'] ?>
             </option>
             <?php foreach ($authors as $author): ?>

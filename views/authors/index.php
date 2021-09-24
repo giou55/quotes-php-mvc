@@ -9,7 +9,7 @@
     </div>
 </div>
 
-<table class="table table-sm">
+<table class="table table-striped table-sm">
         <thead>
     <tr>
         <th scope="col">#</th>
@@ -70,15 +70,15 @@
             <form method="post" action="/authors/create">
                 <div class="form-group">
                     <label>Όνομα</label>
-                    <input type="text" class="form-control" name="name"></input>
+                    <input type="text" class="form-control" name="name" required maxlength="30"></input>
                 </div>
                 <div class="form-group">
                     <label>keyword</label>
-                    <input type="text" class="form-control" name="keyword"></input>
+                    <input type="text" class="form-control" name="keyword" required maxlength="30"></input>
                 </div>
                 <div class="form-group">
                     <label>Ιδιότητα</label>
-                    <input type="text" class="form-control" name="role"></input>
+                    <input type="text" class="form-control" name="role" required maxlength="50"></input>
                 </div>
                 <button type="submit" class="btn btn-primary">Αποθήκευση</button>
             </form>

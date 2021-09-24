@@ -36,6 +36,10 @@ class Author {
             $db = Database::$db;
             if ($this->id) {
                 $db->updateAuthor($this);
+                $quotes = $db->getQuotesByAuthorId($this->id);
+                foreach ($quotes as $quote) {
+                    $db->updateQuoteInAuthorDetails($quote, $this);
+                }
             } else {
                 $db->createAuthor($this);
             }

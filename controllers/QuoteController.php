@@ -27,9 +27,9 @@ class QuoteController {
         ];
 
         $authorData = explode('&', $_POST['author']);
-        $author_id = $authorData[0];
-        $author_name = $authorData[1];
-        $author_role = $authorData[2];
+        $author_id = $authorData[0] ?? null;
+        $author_name = $authorData[1] ?? null;
+        $author_role = $authorData[2] ?? null;
 
         $quoteData['author_id'] = $author_id;
         $quoteData['author_name'] = $author_name;
@@ -42,6 +42,8 @@ class QuoteController {
         if (empty($errors)) {
             header('Location: /quotes');
             exit;
+        } else {
+            return $errors;
         }
     }
 

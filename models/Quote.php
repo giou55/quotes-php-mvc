@@ -25,11 +25,9 @@ class Quote {
         if (!$this->body) {
             $errors[] = 'Quote body is required';
         }
-
         if (!$this->author_name) {
             $errors[] = 'Quote author is required';
         }
-
         if (empty($errors)) {
             $db = Database::$db;
             if ($this->id) {
@@ -37,8 +35,8 @@ class Quote {
             } else {
                 $db->createQuote($this);
             }
+        } else {
+            return $errors;
         }
-
-        return $errors;
     }
 }
