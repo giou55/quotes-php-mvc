@@ -3,7 +3,7 @@
 require_once "./../controllers/AuthorController.php";
 require_once "./../controllers/QuoteController.php";
 require_once "./../controllers/TagController.php";
-//require_once "./Database.php";
+// require_once "./Database.php";
 
 class Router {
     public array $getRoutes = [];
