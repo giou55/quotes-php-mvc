@@ -1,9 +1,7 @@
 <?php
 
-namespace app\controllers;
-use app\models\Author;
-
-use app\Router;
+require_once "./../Router.php";
+require_once "./../models/Author.php";
 
 class AuthorController {
     public static function index(Router $router) {

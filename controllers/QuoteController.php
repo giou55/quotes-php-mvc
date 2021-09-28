@@ -1,9 +1,7 @@
 <?php
 
-namespace app\controllers;
-
-use app\Router;
-use app\models\Quote;
+require_once "./../Router.php";
+require_once "./../models/Quote.php";
 
 class QuoteController {
     public static function index(Router $router) {

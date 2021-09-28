@@ -1,11 +1,9 @@
 <?php
 
-use app\Router;
-use app\controllers\QuoteController;
-use app\controllers\AuthorController;
-use app\controllers\TagController;
-
-require_once __DIR__.'/../vendor/autoload.php';
+require_once "./../controllers/AuthorController.php";
+require_once "./../controllers/QuoteController.php";
+require_once "./../controllers/TagController.php";
+require_once "./../Router.php";
 
 $router = new Router();
 

@@ -1,8 +1,6 @@
 <?php 
 
-namespace app\models;
-
-use app\Database;
+require_once "./../Database.php";
 
 class Tag {
     public ?int $id = null; 

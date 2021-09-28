@@ -1,9 +1,7 @@
 <?php
 
-namespace app\controllers;
-
-use app\Router;
-use app\models\Tag;
+require_once "./../Router.php";
+require_once "./../models/Tag.php";
 
 class TagController {
     public static function index(Router $router) {

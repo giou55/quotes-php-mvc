@@ -1,18 +1,15 @@
 <?php
 
-namespace app;
-
-use PDO;
-use app\models\Quote;
-use app\models\Tag;
-use app\models\Author;
+//require_once "./models/Author.php";
+//require_once "./models/Quote.php";
+//require_once "./models/Tag.php";
 
 class Database {
-    public \PDO $pdo;
+    public $pdo;
     public static Database $db;
 
     public function __construct() {
-        $this->pdo = new PDO('mysql:host=localhost;port=3306;dbname=quotes', 'root', '');
+        $this->pdo = new PDO('mysql:host=localhost;port=3306;dbname=quotes;charset=utf8', 'root', '');
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         self::$db = $this;
     }

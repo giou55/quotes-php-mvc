@@ -1,10 +1,10 @@
 <?php
 
-namespace app;
+require_once "./../controllers/AuthorController.php";
+require_once "./../controllers/QuoteController.php";
+require_once "./../controllers/TagController.php";
+//require_once "./Database.php";
 
-use app\controllers\QuoteController;
-use app\controllers\AuthorController;
-use app\controllers\TagController;
 class Router {
     public array $getRoutes = [];
     public array $postRoutes = [];
@@ -40,9 +40,12 @@ class Router {
        } elseif ($fn && strpos($currentUrl, 'tags')) {
            $qc = new TagController();
             call_user_func(array($qc, $fn), $this);
+       } elseif ($currentUrl === '/') {
+           $qc = new QuoteController();
+           call_user_func(array($qc, 'index'), $this);
        } else {
            echo "Page not found";
-       } 
+       }
     }
 
     public function renderView($view, $params = []) {
