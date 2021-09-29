@@ -1,9 +1,9 @@
 <?php
 
-require_once "./../controllers/AuthorController.php";
-require_once "./../controllers/QuoteController.php";
-require_once "./../controllers/TagController.php";
-// require_once "./Database.php";
+require_once "../controllers/AuthorsController.php";
+require_once "../controllers/QuotesController.php";
+require_once "../controllers/TagsController.php";
+require_once "Database.php";
 
 class Router {
     public array $getRoutes = [];
@@ -27,22 +27,19 @@ class Router {
        $method = $_SERVER['REQUEST_METHOD'];
 
        if ($method === 'GET') {
+           $controllerName = $this->getRoutes[$currentUrl][0] ?? null;
            $fn = $this->getRoutes[$currentUrl][1] ?? null;
        } else {
+           $controllerName = $this->postRoutes[$currentUrl][0] ?? null;
            $fn = $this->postRoutes[$currentUrl][1] ?? null;
        } 
-       if ($fn && strpos($currentUrl, 'quotes')) {
-            $qc = new QuoteController();
-            call_user_func(array($qc, $fn), $this);
-       } elseif ($fn && strpos($currentUrl, 'authors')) {
-           $qc = new AuthorController();
-            call_user_func(array($qc, $fn), $this);
-       } elseif ($fn && strpos($currentUrl, 'tags')) {
-           $qc = new TagController();
+
+       if ($fn) {
+            $qc = new $controllerName();
             call_user_func(array($qc, $fn), $this);
        } elseif ($currentUrl === '/') {
-           $qc = new QuoteController();
-           call_user_func(array($qc, 'index'), $this);
+            $qc = new QuotesController();
+            call_user_func(array($qc, 'index'), $this);
        } else {
            echo "Page not found";
        }

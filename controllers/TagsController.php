@@ -1,9 +1,9 @@
 <?php
 
-require_once "./../Router.php";
-require_once "./../models/Tag.php";
+require_once "../Router.php";
+require_once "../models/Tag.php";
 
-class TagController {
+class TagsController {
     public static function index(Router $router) {
         $tags = $router->db->getTags();
         $router->renderView('tags/index', [

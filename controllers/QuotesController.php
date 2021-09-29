@@ -1,9 +1,9 @@
 <?php
 
-require_once "./../Router.php";
-require_once "./../models/Quote.php";
+require_once "../Router.php";
+require_once "../models/Quote.php";
 
-class QuoteController {
+class QuotesController {
     public static function index(Router $router) {
         $search = $_GET['search'] ?? '';
         $quotes = $router->db->getQuotes($search);

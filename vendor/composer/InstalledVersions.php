@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '155974e4eb6f353e588bb8dd5d322d79c329133a',
+    'reference' => 'b8a7e7eab90331daca64bd0e6c4b0a436eecc646',
     'name' => 'g.giourmetakis/quotes-php-mvc',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '155974e4eb6f353e588bb8dd5d322d79c329133a',
+      'reference' => 'b8a7e7eab90331daca64bd0e6c4b0a436eecc646',
     ),
   ),
 );

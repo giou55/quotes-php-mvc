@@ -1,9 +1,5 @@
 <?php
 
-//require_once "./models/Author.php";
-//require_once "./models/Quote.php";
-//require_once "./models/Tag.php";
-
 class Database {
     public $pdo;
     public static Database $db;

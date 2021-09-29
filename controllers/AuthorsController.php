@@ -1,9 +1,9 @@
 <?php
 
-require_once "./../Router.php";
-require_once "./../models/Author.php";
+require_once "../Router.php";
+require_once "../models/Author.php";
 
-class AuthorController {
+class AuthorsController {
     public static function index(Router $router) {
         $authors = $router->db->getAuthors();
         $router->renderView('authors/index', [
