@@ -5,10 +5,30 @@ require_once "../models/Quote.php";
 
 class QuotesController {
     public static function index(Router $router) {
-        $search = $_GET['search'] ?? '';
-        $quotes = $router->db->getQuotes($search);
+        $quotes = $router->db->getQuotes();
+
+        foreach($quotes as &$value) {
+            $tags = $router->db->getTagsForOneQuote($value['id']);
+            $value['tags'] = $tags;
+        }
+
+        // echo '<pre>';
+        // var_dump($quotes);
+        // echo '</pre>';
+        // exit;
+
         $authors = $router->db->getAuthors();
         $router->renderView('quotes/index', [
+            'quotes' => $quotes,
+            'authors' => $authors,
+        ]);
+    }
+
+    public static function search(Router $router) {
+        $search = $_POST['search'] ?? '';
+        $quotes = $router->db->getQuotes($search);
+        $authors = $router->db->getAuthors();
+        $router->renderView('quotes/search', [
             'quotes' => $quotes,
             'authors' => $authors,
             'search' => $search

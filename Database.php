@@ -80,7 +80,7 @@ class Database {
     }
 
     public function getAuthors() {
-        $statement = $this->pdo->prepare('SELECT * FROM author ORDER BY name DESC');
+        $statement = $this->pdo->prepare('SELECT * FROM author ORDER BY name ASC');
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -115,7 +115,18 @@ class Database {
     }
 
     public function getTags() {
-        $statement = $this->pdo->prepare('SELECT * FROM tags ORDER BY title DESC');
+        $statement = $this->pdo->prepare('SELECT * FROM tags ORDER BY title ASC');
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getTagsForOneQuote($quoteId) {
+        $statement = $this->pdo->prepare('SELECT tags.title 
+                                          FROM tags 
+                                          JOIN quote_tag 
+                                          ON tags.id = quote_tag.tag_id
+                                          WHERE quote_tag.quote_id = :id');
+        $statement->bindValue(':id', $quoteId);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }

@@ -7,8 +7,8 @@
 
       <h2>Ευφυολογήματα, Σοφά Λόγια, Αποφθέγματα</h2>
 
-      <form class="form-inline" action="/quotes">
-        <input type="text" name="search" style="min-width:300px" class="form-control mr-sm-2" placeholder="Αναζήτηση στα αποφθέγματα..." value="<?php echo $search ?>">
+      <form class="form-inline" method="post" action="/quotes">
+        <input type="text" name="search" style="min-width:300px" class="form-control mr-sm-2" placeholder="Αναζήτηση στα αποφθέγματα..." value="">
         <button class="btn btn-success" type="submit">Search</button>
       </form>
 </div>

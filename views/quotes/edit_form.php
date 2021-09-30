@@ -18,10 +18,16 @@
             </option>
             <?php foreach ($authors as $author): ?>
                 <option value="<?php echo $author['id'].'&'.$author['name'].'&'.$author['role'] ?>">
-                    <?php echo $author['name'] ?>
+                    <?php echo $author['name']; ?>
                 </option>
             <?php endforeach; ?>
         </select>
     </div>
+    <div class="mb-3">
+        <?php foreach ($quote['tags'] as $key => $value): ?>
+            <span><?php echo $value['title'] . " "; ?></span>
+        <?php endforeach; ?>
+    </div>
+    
     <button type="submit" class="btn btn-primary">Αποθήκευση</button>
 </form>

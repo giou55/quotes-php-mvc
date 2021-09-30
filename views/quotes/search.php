@@ -1,13 +1,10 @@
 <div class="d-flex flex-row justify-content-start align-items-center mb-4">
-    <h3 class="mr-3">Αποφθέγματα</h3> 
-    <div>
-        <button class="btn btn-sm btn-primary"
-                onclick="document.getElementById('createModal').style.display = 'block'"
-    >
-        Νέο Απόφθεγμα
-    </button>
-    </div>
+    <h3 class="mr-3">Αποτελέσματα αναζήτησης για: <?php echo $search ?></h3> 
 </div>
+
+<?php if (!$quotes) { ?>
+    <p> Δεν βρέθηκαν αποφθέγματα. </p>
+<?php } ?>
 
 <table class="table table-sm">
     <?php foreach ($quotes as $i => $quote) { ?>
@@ -15,12 +12,6 @@
             <td><?php echo $quote['body'] ?></td>
             <td><?php echo $quote['author_name'] ?></td>
             <td><?php echo $quote['author_role'] ?></td>
-            <td><?php
-                    foreach ($quote['tags'] as $key => $value) {
-                        echo $value['title'] . " ";
-                    }
-                ?>
-            </td>
             <td>
                 <button class="btn btn-sm btn-outline-primary"
                         onclick="document.getElementById('myModal<?php echo $quote['id'] ?>')

@@ -9,6 +9,7 @@ $router = new Router();
 
 $router->get('/', [QuotesController::class, 'index']);
 $router->get('/quotes', [QuotesController::class, 'index']);
+$router->post('/quotes', [QuotesController::class, 'search']);
 $router->get('/quotes/create', [QuotesController::class, 'create']);
 $router->post('/quotes/create', [QuotesController::class, 'create']);
 $router->get('/quotes/update', [QuotesController::class, 'update']);

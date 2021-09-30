@@ -8,6 +8,7 @@ class Quote {
     public ?string $author_id = null; 
     public ?string $author_name = null; 
     public ?string $author_role = null; 
+    public ?array $tags = []; 
 
     public function load($data) {
         $this->id = $data['id'] ?? null;
