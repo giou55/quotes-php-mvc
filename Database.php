@@ -48,11 +48,6 @@ class Database {
     }
 
     public function updateQuote(Quote $quote) {
-        // echo '<pre>';
-        // var_dump($quote);
-        // echo '</pre>';
-        // exit;
-
         $statement = $this->pdo->prepare(
             "UPDATE quotes SET body = 
             :body, author_id = :author_id, author_name = :author_name, author_role = :author_role 
@@ -67,15 +62,11 @@ class Database {
 
         if ($quote->tags !== null) {
             function add_quoteId($tagId) {
-                return 5 . ',' . $tagId;
+                return "(:id, " . $tagId . ")";
             }
 
-            $valuesArray= array_map('add_quoteId', $quote->tags);
-
-            echo '<pre>';
-            var_dump($valuesArray);
-            echo '</pre>';
-            exit;
+            $valuesArray = array_map('add_quoteId', $quote->tags);
+            $valuesStr = implode(" ,", $valuesArray);
 
             $statement = $this->pdo->prepare(
                 "DELETE FROM quote_tag WHERE quote_id = :id"
@@ -87,11 +78,17 @@ class Database {
             //     "INSERT INTO quote_tag (quote_id, tag_id) VALUES (:id,6),(:id,7),(:id,3),(:id,4),(:id,5)"
             // );
             $statement = $this->pdo->prepare(
-                "INSERT INTO quote_tag (quote_id, tag_id) VALUES :values"
+                "INSERT INTO quote_tag (quote_id, tag_id) VALUES $valuesStr"
             );
-            $statement->bindValue(':values', $valuesArray);
+            $statement->bindValue(':id', $quote->id);
             $statement->execute();
-        }   
+        } else {
+            $statement = $this->pdo->prepare(
+                "DELETE FROM quote_tag WHERE quote_id = :id"
+            );
+            $statement->bindValue(':id', $quote->id);
+            $statement->execute();
+        }  
     }
 
     public function updateQuoteInAuthorDetails($quote, Author $author) {
