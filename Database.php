@@ -48,6 +48,11 @@ class Database {
     }
 
     public function updateQuote(Quote $quote) {
+        // echo '<pre>';
+        // var_dump($quote);
+        // echo '</pre>';
+        // exit;
+
         $statement = $this->pdo->prepare(
             "UPDATE quotes SET body = 
             :body, author_id = :author_id, author_name = :author_name, author_role = :author_role 
@@ -59,6 +64,34 @@ class Database {
         $statement->bindValue(':author_role', $quote->author_role);
         $statement->bindValue(':id', $quote->id);
         $statement->execute();
+
+        if ($quote->tags !== null) {
+            function add_quoteId($tagId) {
+                return 5 . ',' . $tagId;
+            }
+
+            $valuesArray= array_map('add_quoteId', $quote->tags);
+
+            echo '<pre>';
+            var_dump($valuesArray);
+            echo '</pre>';
+            exit;
+
+            $statement = $this->pdo->prepare(
+                "DELETE FROM quote_tag WHERE quote_id = :id"
+            );
+            $statement->bindValue(':id', $quote->id);
+            $statement->execute();
+
+            // $statement = $this->pdo->prepare(
+            //     "INSERT INTO quote_tag (quote_id, tag_id) VALUES (:id,6),(:id,7),(:id,3),(:id,4),(:id,5)"
+            // );
+            $statement = $this->pdo->prepare(
+                "INSERT INTO quote_tag (quote_id, tag_id) VALUES :values"
+            );
+            $statement->bindValue(':values', $valuesArray);
+            $statement->execute();
+        }   
     }
 
     public function updateQuoteInAuthorDetails($quote, Author $author) {
@@ -121,7 +154,7 @@ class Database {
     }
 
     public function getTagsForOneQuote($quoteId) {
-        $statement = $this->pdo->prepare('SELECT tags.title 
+        $statement = $this->pdo->prepare('SELECT tags.title, tags.id 
                                           FROM tags 
                                           JOIN quote_tag 
                                           ON tags.id = quote_tag.tag_id

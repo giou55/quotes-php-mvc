@@ -6,21 +6,18 @@ require_once "../models/Quote.php";
 class QuotesController {
     public static function index(Router $router) {
         $quotes = $router->db->getQuotes();
+        $tags = $router->db->getTags();
 
         foreach($quotes as &$value) {
-            $tags = $router->db->getTagsForOneQuote($value['id']);
-            $value['tags'] = $tags;
+            $tags_of_quote = $router->db->getTagsForOneQuote($value['id']);
+            $value['tags'] = $tags_of_quote;
         }
-
-        // echo '<pre>';
-        // var_dump($quotes);
-        // echo '</pre>';
-        // exit;
 
         $authors = $router->db->getAuthors();
         $router->renderView('quotes/index', [
             'quotes' => $quotes,
             'authors' => $authors,
+            'tags' => $tags
         ]);
     }
 
@@ -77,7 +74,8 @@ class QuotesController {
             'body' => '',
             'author_id' => '',
             'author_name' => '',
-            'author_role' => ''
+            'author_role' => '',
+            'tags' => []
         ];
 
         $authorData = explode('&',$_POST['author']);
@@ -90,6 +88,12 @@ class QuotesController {
         $quoteData['author_name'] = $author_name;
         $quoteData['author_role'] = $author_role;
         $quoteData['body'] = $_POST['body'];
+        $quoteData['tags'] = $_POST['tags'];
+
+        // echo '<pre>';
+        // var_dump($quoteData['tags']);
+        // echo '</pre>';
+        // exit;
 
         $quote = new Quote();
         $quote->load($quoteData);

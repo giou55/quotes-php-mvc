@@ -16,6 +16,7 @@ class Quote {
         $this->author_id = $data['author_id'] ?? null;
         $this->author_name = $data['author_name'] ?? null;
         $this->author_role = $data['author_role'] ?? null;
+        $this->tags = $data['tags'] ?? null;
     }
 
     public function save() {
