@@ -1,5 +1,5 @@
 <div class="d-flex flex-row justify-content-start align-items-center mb-4">
-    <h3 class="mr-3">Πρόσωπα</h3> 
+    <h4 class="mr-3">Πρόσωπα</h4> 
     <div>
         <button class="btn btn-sm btn-primary"
                 onclick="document.getElementById('authorModal').style.display = 'block'"
@@ -9,7 +9,7 @@
     </div>
 </div>
 
-<table class="table table-striped table-sm">
+<table class="table table-striped table-sm table-responsive">
         <thead>
     <tr>
         <th scope="col">#</th>
@@ -52,7 +52,7 @@
                         >
                             &times;
             </span>
-            <h4>Επεξεργασία</h4>
+            <h5>Επεξεργασία</h5>
             <?php include "edit_form.php"; ?>
         </div>
     </div>
@@ -65,8 +65,7 @@
             >
                 &times;
             </span>
-            <h4>Νέο Πρόσωπο</h4>
-
+            <h5>Νέο Πρόσωπο</h5>
             <form method="post" action="/authors/create">
                 <div class="form-group">
                     <label>Όνομα</label>

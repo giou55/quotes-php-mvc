@@ -33,12 +33,12 @@ class QuotesController {
     }
 
     public static function create(Router $router) {
-        $errors = [];
         $quoteData = [
             'body' => '',
             'author_id' => '',
             'author_name' => '',
-            'author_role' => ''
+            'author_role' => '',
+            'tags' => []
         ];
 
         $authorData = explode('&', $_POST['author']);
@@ -50,16 +50,13 @@ class QuotesController {
         $quoteData['author_name'] = $author_name;
         $quoteData['author_role'] = $author_role;
         $quoteData['body'] = $_POST['body'];
+        $quoteData['tags'] = $_POST['tags'];
 
         $quote = new Quote();
         $quote->load($quoteData);
-        $errors = $quote->save();
-        if (empty($errors)) {
-            header('Location: /quotes');
-            exit;
-        } else {
-            return $errors;
-        }
+        $quote->save();
+        header('Location: /quotes');
+        exit;
     }
 
    public static function update(Router $router) {
@@ -89,11 +86,6 @@ class QuotesController {
         $quoteData['author_role'] = $author_role;
         $quoteData['body'] = $_POST['body'];
         $quoteData['tags'] = $_POST['tags'];
-
-        // echo '<pre>';
-        // var_dump($quoteData['tags']);
-        // echo '</pre>';
-        // exit;
 
         $quote = new Quote();
         $quote->load($quoteData);

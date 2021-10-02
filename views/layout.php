@@ -14,8 +14,12 @@
     </head>
 
     <body>
-        <?php include "header.php"; ?>
-        <?php echo $content; ?>
+        <div class="container-fluid">
+            <?php include "header.php"; ?>
+        </div>
+        <div class="container-fluid">
+            <?php echo $content; ?>
+        </div>
 
     </body>
 </html>

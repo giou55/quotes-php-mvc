@@ -45,6 +45,26 @@ class Database {
         $statement->bindValue(':author_name', $quote->author_name);
         $statement->bindValue(':author_role', $quote->author_role);
         $statement->execute();
+
+        if ($quote->tags !== null) {
+            function add_quoteId($tagId) {
+                return "(:id, " . $tagId . ")";
+            }
+            $valuesArray = array_map('add_quoteId', $quote->tags);
+            $valuesStr = implode(" ,", $valuesArray);
+
+            $statement = $this->pdo->prepare(
+                "SELECT id FROM quotes ORDER BY id DESC LIMIT 1"
+            );
+            $statement->execute();
+            $lastQuoteId = $statement->fetch(PDO::FETCH_ASSOC);
+
+            $statement = $this->pdo->prepare(
+                "INSERT INTO quote_tag (quote_id, tag_id) VALUES $valuesStr"
+            );
+            $statement->bindValue(':id', $lastQuoteId["id"]);
+            $statement->execute();
+        }
     }
 
     public function updateQuote(Quote $quote) {
@@ -64,7 +84,6 @@ class Database {
             function add_quoteId($tagId) {
                 return "(:id, " . $tagId . ")";
             }
-
             $valuesArray = array_map('add_quoteId', $quote->tags);
             $valuesStr = implode(" ,", $valuesArray);
 
@@ -74,9 +93,8 @@ class Database {
             $statement->bindValue(':id', $quote->id);
             $statement->execute();
 
-            // $statement = $this->pdo->prepare(
-            //     "INSERT INTO quote_tag (quote_id, tag_id) VALUES (:id,6),(:id,7),(:id,3),(:id,4),(:id,5)"
-            // );
+            //"INSERT INTO quote_tag (quote_id, tag_id) VALUES (:id,6),(:id,7),(:id,3),(:id,4),(:id,5)"
+
             $statement = $this->pdo->prepare(
                 "INSERT INTO quote_tag (quote_id, tag_id) VALUES $valuesStr"
             );
@@ -105,6 +123,10 @@ class Database {
 
     public function deleteQuote($id) {
         $statement = $this->pdo->prepare('DELETE FROM quotes WHERE id = :id');
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+
+        $statement = $this->pdo->prepare('DELETE FROM quote_tag WHERE quote_id = :id');
         $statement->bindValue(':id', $id);
         return $statement->execute();
     }
