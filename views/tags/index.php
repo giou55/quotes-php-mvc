@@ -56,7 +56,6 @@
                 &times;
             </span>
             <h5>Νέο Tag</h5>
-
             <form method="post" action="/tags/create">
                 <div class="form-group">
                     <input type="text" class="form-control" name="title" required maxlength="20"></input>

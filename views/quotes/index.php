@@ -1,6 +1,6 @@
 <div class="row">
 
-    <div class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-4">
+    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-3">
         <div class="d-flex flex-row justify-content-start align-items-center mb-4">
             <h4 class="mr-3">Αποφθέγματα</h4> 
             <div class="mr-3">
@@ -13,17 +13,23 @@
         </div>
     </div>
 
-    <div class="col-12 col-sm-12 col-md-6 col-lg-7 col-xl-6">
+    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-3">
         <div class="d-flex flex-row justify-content-start align-items-center mb-4">
             <?php include "select_author.php"; ?>
         </div>
     </div>
+
+    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-3">
+        <div class="d-flex flex-row justify-content-start align-items-center mb-4">
+            <?php include "select_tag.php"; ?>
+        </div>
+    </div>
 </div>
 
-<table class="table table-sm table-responsive">
+<table class="table table-sm table-responsive-lg">
     <?php foreach ($quotes as $i => $quote) { ?>
         <tr>
-            <td class="font-italic"><?php echo $quote['body'] ?></td>
+            <td><q><?php echo $quote['body'] ?></q></td>
             <td><?php echo "<h6>" . $quote['author_name'] . "</h6>" ?></td>
             <td><?php echo $quote['author_role'] ?></td>
             <td class="small"><?php

@@ -35,6 +35,18 @@ class Database {
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getQuotesByTagId($tagId) {
+        $statement = $this->pdo->prepare(
+            'SELECT quotes.id, quotes.body, quotes.author_id, quotes.author_name, quotes.author_role, quotes.create_date
+            FROM quotes 
+            JOIN quote_tag 
+            ON quotes.id = quote_tag.quote_id
+            WHERE quote_tag.tag_id = :id');
+        $statement->bindValue(':id', $tagId);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function createQuote(Quote $quote) {
         $statement = $this->pdo->prepare(
             "INSERT INTO quotes (body, author_id, author_name, author_role)

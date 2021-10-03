@@ -22,14 +22,81 @@ class QuotesController {
     }
 
     public static function search(Router $router) {
-        $search = $_POST['search'] ?? '';
-        $quotes = $router->db->getQuotes($search);
-        $authors = $router->db->getAuthors();
-        $router->renderView('quotes/search', [
-            'quotes' => $quotes,
-            'authors' => $authors,
-            'search' => $search
-        ]);
+        if (isset($_POST['search'])) {
+           $search = $_POST['search'] ?? '';
+            $quotes = $router->db->getQuotes($search);
+
+            $tags = $router->db->getTags();
+            foreach($quotes as &$value) {
+                $tags_of_quote = $router->db->getTagsForOneQuote($value['id']);
+                $value['tags'] = $tags_of_quote;
+            }
+            
+            $authors = $router->db->getAuthors();
+            $router->renderView('quotes/search', [
+                'quotes' => $quotes,
+                'authors' => $authors,
+                'tags' => $tags,
+                'search' => $search
+            ]); 
+        }
+        if (isset($_POST['author'])) {
+            $author = $_POST['author'] ?? '';
+            if ($author === "all") {
+                $quotes = $router->db->getQuotes();
+            } else {
+                $authorData = explode('&', $_POST['author']);
+                $author_id = $authorData[0] ?? null;
+                $author_name = $authorData[1] ?? null;
+                $quotes = $router->db->getQuotesByAuthorId($author_id);
+            }
+
+            $tags = $router->db->getTags();
+            foreach($quotes as &$value) {
+                $tags_of_quote = $router->db->getTagsForOneQuote($value['id']);
+                $value['tags'] = $tags_of_quote;
+            }
+
+            $authors = $router->db->getAuthors();
+            $router->renderView('quotes/index', [
+                'quotes' => $quotes,
+                'authors' => $authors,
+                'tags' => $tags,
+                'author_id' => $author_id ?? null,
+                'author_name' => $author_name ?? null
+
+            ]); 
+        }
+
+        if (isset($_POST['tag'])) {
+            $tag = $_POST['tag'] ?? '';
+            if ($tag === "all") {
+                $quotes = $router->db->getQuotes();
+            } else {
+                $tagData = explode('&', $_POST['tag']);
+                $tag_id = $tagData[0] ?? null;
+                $tag_title = $tagData[1] ?? null;
+                $quotes = $router->db->getQuotesByTagId($tag_id);
+            }
+
+            $tags = $router->db->getTags();
+            foreach($quotes as &$value) {
+                $tags_of_quote = $router->db->getTagsForOneQuote($value['id']);
+                $value['tags'] = $tags_of_quote;
+            }
+
+            $authors = $router->db->getAuthors();
+            $router->renderView('quotes/index', [
+                'quotes' => $quotes,
+                'authors' => $authors,
+                'tags' => $tags,
+                'tag_id' => $tag_id ?? null,
+                'tag_title' => $tag_title ?? null,
+                'author_id' => $author_id ?? null,
+                'author_name' => $author_name ?? null
+
+            ]); 
+        }
     }
 
     public static function create(Router $router) {

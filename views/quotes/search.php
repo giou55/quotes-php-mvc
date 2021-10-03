@@ -1,17 +1,23 @@
 <div class="d-flex flex-row justify-content-start align-items-center mb-4">
-    <h3 class="mr-3">Αποτελέσματα αναζήτησης για: <?php echo $search ?></h3> 
+    <h4 class="mr-3">Αποτελέσματα αναζήτησης για: "<?php echo $search ?>"</h4> 
 </div>
 
 <?php if (!$quotes) { ?>
     <p> Δεν βρέθηκαν αποφθέγματα. </p>
 <?php } ?>
 
-<table class="table table-sm">
+<table class="table table-sm table-responsive-lg">
     <?php foreach ($quotes as $i => $quote) { ?>
         <tr>
-            <td><?php echo $quote['body'] ?></td>
-            <td><?php echo $quote['author_name'] ?></td>
+            <td><q><?php echo $quote['body'] ?></q></td>
+            <td><?php echo "<h6>" . $quote['author_name'] . "</h6>" ?></td>
             <td><?php echo $quote['author_role'] ?></td>
+            <td class="small"><?php
+                    foreach ($quote['tags'] as $key => $value) {
+                        echo "<div>" . $value['title'] . "</div>";
+                    }
+                ?>
+            </td>
             <td>
                 <button class="btn btn-sm btn-outline-primary"
                         onclick="document.getElementById('myModal<?php echo $quote['id'] ?>')
