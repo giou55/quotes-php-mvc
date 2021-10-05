@@ -10,13 +10,23 @@ class Database {
         self::$db = $this;
     }
 
-    public function getQuotes($keyword = '') {
-        if ($keyword) {
-            $statement = $this->pdo->prepare('SELECT * FROM quotes WHERE body like :keyword ORDER BY create_date DESC');
-            $statement->bindValue(":keyword", "%$keyword%");
-        } else {
-            $statement = $this->pdo->prepare('SELECT * FROM quotes ORDER BY create_date DESC');
-        }
+    public function getAllQuotes() {
+        $statement = $this->pdo->prepare('SELECT * FROM quotes ORDER BY create_date DESC');
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getQuotesByPage($page_first_result, $results_per_page) {
+        $statement = $this->pdo->prepare('SELECT * FROM quotes LIMIT ' . $page_first_result . ',' . $results_per_page);
+        // $statement->bindValue(':page', $page_first_result);
+        //$statement->bindValue(':results', $results_per_page);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function searchQuotes($keyword = '') {
+        $statement = $this->pdo->prepare('SELECT * FROM quotes WHERE body like :keyword ORDER BY create_date DESC');
+        $statement->bindValue(":keyword", "%$keyword%");
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }

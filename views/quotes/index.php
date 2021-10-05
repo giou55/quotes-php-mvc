@@ -54,6 +54,19 @@
     <?php } ?>
 </table>
 
+
+<div class="row">
+    <div class="col-12">
+        <?php for ($p = 1; $p <= $page; $p++) : ?>
+            <form method="post" action="/quotes" style="display: inline-block">
+                <input  type="hidden" name="page" value="<?php echo $p ?>"/>
+                <button type="submit" class="btn btn-sm <?php echo $current_page == $p ? 'btn-primary' : 'btn-outline-primary'; ?>"><?php echo $p ?></button>
+            </form>
+        <?php endfor; ?>
+    </div>
+</div>
+
+
 <?php foreach ($quotes as $i => $quote) { ?>
     <div id="myModal<?php echo $quote['id'] ?>" class="modal">
         <div class="modal-content">

@@ -1,6 +1,6 @@
 <span class="mr-2 font-weight-bold">Επέλεξε πρόσωπο:</span>
 
-<form method="post" action="/quotes">
+<form method="post" action="/quotes/search">
         <select class="form-control" name="author" onchange="this.form.submit()" required>
              <?php if (isset($author_id)): ?>
                 <option value="<?php echo $author_id.'&'.$author_name ?>" selected>

@@ -1,6 +1,6 @@
 <span class="mr-2 font-weight-bold">Επέλεξε tag:</span>
 
-<form method="post" action="/quotes">
+<form method="post" action="/quotes/search">
         <select class="form-control" name="tag" onchange="this.form.submit()" required>
              <?php if (isset($tag_id)): ?>
                 <option value="<?php echo $tag_id.'&'.$tag_title ?>" selected>
