@@ -1,5 +1,5 @@
 <form method="post" action="/authors/update">
-<input type="hidden" name="id" value="<?php echo $author['id'] ?>"/>
+    <input type="hidden" name="id" value="<?php echo $author['id'] ?>"/>
     <div class="form-group">
         <label>Όνομα</label>
         <input type="text" class="form-control" name="name" value="<?php echo $author['name'] ?>" required maxlength="30" />

@@ -24,6 +24,5 @@
         <div class="container-fluid">
             <?php echo $content; ?>
         </div>
-
     </body>
 </html>

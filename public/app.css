@@ -18,7 +18,8 @@
 }
 
 /* Modal Content */
-.modal-content {
+.my-modal-content {
+	position: relative;
 	background-color: #fefefe;
 	margin: auto;
 	padding: 20px;
@@ -72,15 +73,11 @@
 }
 
 /* The Close Button */
-.close {
-	float: right;
-	font-size: 28px;
+.close-btn {
+	font-size: 30px;
 	font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-	color: #000;
 	text-decoration: none;
 	cursor: pointer;
 }
+
+

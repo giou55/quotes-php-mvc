@@ -38,27 +38,35 @@
 
 <?php foreach ($authors as $i => $author) { ?>
     <div id="editModal<?php echo $author['id'] ?>" class="modal">
-        <div class="modal-content">
-            <span class="close"
-                  onclick="document.getElementById('editModal<?php echo $author['id'] ?>')
-                        .style.display = 'none'"
-                        >
-                            &times;
-            </span>
-            <h5>Επεξεργασία</h5>
-            <?php include "edit_form.php"; ?>
+        <div class="my-modal-content">
+            <div class="d-flex flex-row justify-content-between align-items-center mb-3">
+                <h5 class="mb-0">Επεξεργασία</h5>
+                <span class="close-btn"
+                    onclick="document.getElementById('editModal<?php echo $author['id'] ?>')
+                            .style.display = 'none'"
+                            >
+                                &times;
+                </span>
+            </div>
+            <div>
+                <?php include "edit_form.php"; ?>
+            </div> 
         </div>
     </div>
 <?php } ?>
 
+
 <div id="authorModal" class="modal">
-    <div class="modal-content">
-            <span class="close"
+    <div class="my-modal-content">
+        <div class="d-flex flex-row justify-content-between align-items-center mb-3">
+            <h5 class="mb-0">Νέο Πρόσωπο</h5>
+            <span class="close-btn"
                 onclick="document.getElementById('authorModal').style.display = 'none'"
             >
                 &times;
             </span>
-            <h5>Νέο Πρόσωπο</h5>
+        </div>
+        <div>
             <form method="post" action="/authors/create">
                 <div class="form-group">
                     <label>Όνομα</label>
@@ -74,6 +82,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Αποθήκευση</button>
             </form>
+        </div>
     </div>
 </div>
 

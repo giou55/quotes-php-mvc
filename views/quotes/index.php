@@ -41,7 +41,7 @@
             <td></td>
             <td>
                 <button class="btn btn-sm"
-                        onclick="document.getElementById('myModal<?php echo $quote['id'] ?>')
+                        onclick="document.getElementById('editModal<?php echo $quote['id'] ?>')
                         .style.display = 'block'"
                 >
                     <img src="<?php echo BASE_URL; ?>/pencil-square.svg" alt="">
@@ -61,7 +61,7 @@
 
 <?php if (isset($page)): ?>
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 mb-4">
             <?php for ($p = 1; $p <= $page; $p++) : ?>
                 <form method="post" action="/quotes" style="display: inline-block">
                     <input  type="hidden" name="page" value="<?php echo $p ?>"/>
@@ -74,36 +74,37 @@
 
 
 <?php foreach ($quotes as $i => $quote) { ?>
-    <div id="myModal<?php echo $quote['id'] ?>" class="modal">
-        <div class="modal-content">
-            <span class="close"
-                  onclick="document.getElementById('myModal<?php echo $quote['id'] ?>')
-                        .style.display = 'none'"
-                        >
-                            &times;
-            </span>
-            <h5>Επεξεργασία</h5>
-            <?php include "edit_form.php"; ?>
+    <div id="editModal<?php echo $quote['id'] ?>" class="modal">
+        <div class="my-modal-content">
+            <div class="d-flex flex-row justify-content-between align-items-center mb-3">
+                <h5 class="mb-0">Επεξεργασία</h5>
+                <span class="close-btn"
+                    onclick="document.getElementById('editModal<?php echo $quote['id'] ?>')
+                            .style.display = 'none'"
+                            >
+                                &times;
+                </span>
+            </div>
+            <div>
+                <?php include "edit_form.php"; ?>
+            </div> 
         </div>
     </div>
 <?php } ?>
 
-<div id="createModal" class="modal">
-        <div class="modal-content">
-            <span class="close"
-                  onclick="document.getElementById('createModal')
-                        .style.display = 'none'"
-                        >
-                            &times;
-            </span>
-            <h5>Νέο Απόφθεγμα</h5>
-            <?php
-                echo '<pre>';
-                
-                if (isset($errors)) var_dump($errors);
-                echo '</pre>';
-            ?>
 
+<div id="createModal" class="modal">
+    <div class="my-modal-content">
+        <div class="d-flex flex-row justify-content-between align-items-center mb-3">
+            <h5 class="mb-0">Νέο Απόφθεγμα</h5>
+            <span class="close-btn"
+                onclick="document.getElementById('createModal')
+                    .style.display = 'none'"
+            >
+                &times;
+            </span>
+        </div>
+        <div>
             <form method="post" action="/quotes/create">
                 <div class="form-group">
                     <textarea class="form-control" name="body" required maxlength="200"></textarea>
@@ -118,8 +119,8 @@
                                 <?php echo $author['name'] ?>
                             </option>
                         <?php endforeach; ?>
-                  </select>
-                 </div>
+                    </select>
+                    </div>
 
                 <div class="form-group">
                     <?php foreach ($tags as $tag): ?>
@@ -132,5 +133,6 @@
             </form>
         </div>
     </div>
+</div>
 
 

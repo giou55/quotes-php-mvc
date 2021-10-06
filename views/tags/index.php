@@ -37,33 +37,42 @@
 
 <?php foreach ($tags as $i => $tag) { ?>
     <div id="editModal<?php echo $tag['id'] ?>" class="modal">
-        <div class="modal-content">
-            <span class="close"
-                  onclick="document.getElementById('editModal<?php echo $tag['id'] ?>')
-                        .style.display = 'none'"
-                        >
-                            &times;
-            </span>
-            <h5>Επεξεργασία</h5>
-            <?php include "edit_form.php"; ?>
+        <div class="my-modal-content">
+            <div class="d-flex flex-row justify-content-between align-items-center mb-3">
+                <h5 class="mb-0">Επεξεργασία</h5>
+                <span class="close-btn"
+                    onclick="document.getElementById('editModal<?php echo $tag['id'] ?>')
+                            .style.display = 'none'"
+                            >
+                                &times;
+                </span>
+            </div>
+            <div>
+                <?php include "edit_form.php"; ?>
+            </div> 
         </div>
     </div>
 <?php } ?>
 
 
 <div id="tagModal" class="modal">
-    <div class="modal-content">
-            <span class="close"
+    <div class="my-modal-content">
+        <div class="d-flex flex-row justify-content-between align-items-center mb-3">
+            <h5 class="mb-0">Νέο Tag</h5>
+            <span class="close-btn"
                 onclick="document.getElementById('tagModal').style.display = 'none'"
             >
                 &times;
             </span>
-            <h5>Νέο Tag</h5>
+            
+        </div>
+        <div>
             <form method="post" action="/tags/create">
                 <div class="form-group">
                     <input type="text" class="form-control" name="title" required maxlength="20"></input>
                 </div>
                 <button type="submit" class="btn btn-primary">Αποθήκευση</button>
             </form>
+        </div>
     </div>
 </div>
