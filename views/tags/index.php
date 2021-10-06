@@ -10,26 +10,29 @@
 </div>
 
 
-<table class="table table-striped table-sm table-responsive">
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
     <?php foreach ($tags as $i => $tag) { ?>
-        <tr>
-            <th scope="row"><?php echo $i + 1 ?></th>
-            <td><?php echo $tag['title'] ?></td>
-            <td>
-                <button class="btn btn-sm btn-outline-primary"
-                        onclick="document.getElementById('editModal<?php echo $tag['id'] ?>')
-                        .style.display = 'block'"
-                >
-                    Edit
-                </button>
-                <form method="post" action="/tags/delete" style="display: inline-block">
-                    <input  type="hidden" name="id" value="<?php echo $tag['id'] ?>"/>
-                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
-                </form>
-            </td>
-        </tr>
+        <div class="col mb-4">
+            <div class="card">
+                <div class="card-body d-flex justify-content-center align-items-center">
+                    <h6 class="card-text mb-0 mr-4"><?php echo $tag['title'] ?></h6>
+                    <button class="btn btn-sm"
+                                onclick="document.getElementById('editModal<?php echo $tag['id'] ?>')
+                                .style.display = 'block'"
+                        >
+                        <img src="<?php echo BASE_URL; ?>/pencil-square.svg" alt="">
+                    </button>
+                    <form method="post" action="/tags/delete" style="display: inline-block">
+                        <input  type="hidden" name="id" value="<?php echo $tag['id'] ?>"/>
+                        <button type="submit" class="btn btn-sm">
+                            <img src="<?php echo BASE_URL; ?>/trash.svg" alt="">
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     <?php } ?>
-</table>
+</div>
 
 
 <?php foreach ($tags as $i => $tag) { ?>

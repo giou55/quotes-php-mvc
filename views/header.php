@@ -13,7 +13,7 @@
     <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4 p-3">
       <form class="form-inline" method="post" action="/quotes/search">
         <input type="text" name="search" style="min-width:260px" class="form-control mr-sm-2" placeholder="Αναζήτηση στα αποφθέγματα..." value="">
-        <button class="btn btn-success" type="submit">Search</button>
+        <button class="btn btn-success" type="submit">Αναζήτηση</button>
       </form>
     </div>
 

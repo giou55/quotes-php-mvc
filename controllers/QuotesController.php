@@ -5,7 +5,7 @@ require_once "../models/Quote.php";
 
 class QuotesController {
     public static function index(Router $router) {
-        $results_per_page = 4; 
+        $results_per_page = 20; 
 
         if (isset ($_POST['page']) ) {  
             $page = $_POST['page'];   

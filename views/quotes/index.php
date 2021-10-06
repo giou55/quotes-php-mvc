@@ -38,16 +38,21 @@
                     }
                 ?>
             </td>
+            <td></td>
             <td>
-                <button class="btn btn-sm btn-outline-primary"
+                <button class="btn btn-sm"
                         onclick="document.getElementById('myModal<?php echo $quote['id'] ?>')
                         .style.display = 'block'"
                 >
-                    Edit
+                    <img src="<?php echo BASE_URL; ?>/pencil-square.svg" alt="">
                 </button>
+            </td>
+            <td>
                 <form method="post" action="/quotes/delete" style="display: inline-block">
                     <input  type="hidden" name="id" value="<?php echo $quote['id'] ?>"/>
-                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                    <button type="submit" class="btn btn-sm">
+                        <img src="<?php echo BASE_URL; ?>/trash.svg" alt="">
+                    </button>
                 </form>
             </td>
         </tr>

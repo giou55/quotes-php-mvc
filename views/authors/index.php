@@ -9,39 +9,32 @@
     </div>
 </div>
 
-<table class="table table-striped table-sm table-responsive">
-        <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Όνομα</th>
-        <th scope="col">Keyword</th>
-        <th scope="col">Ιδιότητα</th>
-        <th scope="col">Actions</th>
-    </tr>
-    </thead>
-    <tbody>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
     <?php foreach ($authors as $i => $author) { ?>
-        <tr>
-            <th scope="row"><?php echo $i + 1 ?></th>
-            <td><?php echo $author['name'] ?></td>
-            <td><?php echo $author['keyword'] ?></td>
-            <td><?php echo $author['role'] ?></td>
-            <td>
-                <button class="btn btn-sm btn-outline-primary"
+        <div class="col mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-text"><?php echo $author['name'] ?></h6>
+                    <p class="card-text"><?php echo $author['role'] ?></p>
+                    <button class="btn btn-sm"
                         onclick="document.getElementById('editModal<?php echo $author['id'] ?>')
                         .style.display = 'block'"
                 >
-                    Edit
+                    <img src="<?php echo BASE_URL; ?>/pencil-square.svg" alt="">
                 </button>
                 <form method="post" action="/authors/delete" style="display: inline-block">
                     <input  type="hidden" name="id" value="<?php echo $author['id'] ?>"/>
-                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                    <button type="submit" class="btn btn-sm">
+                        <img src="<?php echo BASE_URL; ?>/trash.svg" alt="">
+                    </button>
                 </form>
-            </td>
-        </tr>
+                </div>
+            </div>
+        </div>
     <?php } ?>
-    </tbody>
-</table>
+</div>
+
 
 <?php foreach ($authors as $i => $author) { ?>
     <div id="editModal<?php echo $author['id'] ?>" class="modal">

@@ -1,11 +1,13 @@
 <?php
 
+include_once('config.php');
+
 class Database {
     public $pdo;
     public static Database $db;
 
     public function __construct() {
-        $this->pdo = new PDO('mysql:host=localhost;port=3306;dbname=quotes;charset=utf8', 'root', '');
+        $this->pdo = new PDO('mysql:host=localhost;port=3306;dbname='.DATABASE_NAME.';charset=utf8', USERNAME, PASSWORD);
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         self::$db = $this;
     }
