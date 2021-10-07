@@ -32,5 +32,5 @@
         <?php endforeach; ?>
     </div>
     
-    <button type="submit" class="btn btn-primary">Αποθήκευση</button>
+    <button type="submit" class="btn btn-sm btn-primary">Αποθήκευση</button>
 </form>

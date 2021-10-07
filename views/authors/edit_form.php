@@ -12,5 +12,5 @@
         <label>Ιδιότητα</label>
         <input type="text" class="form-control" name="role" value="<?php echo $author['role'] ?>" required maxlength="50" />
     </div>
-    <button type="submit" class="btn btn-primary">Αποθήκευση</button>
+    <button type="submit" class="btn btn-sm btn-primary">Αποθήκευση</button>
 </form>

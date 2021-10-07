@@ -6,54 +6,42 @@ require_once "../models/Quote.php";
 class QuotesController {
     public static function index(Router $router) {
         $results_per_page = 20; 
+        $quotes = $router->db->getAllQuotes();
+        $number_of_result = count($quotes);
+        $tags = $router->db->getTags();
+        $authors = $router->db->getAuthors();
 
         if (isset ($_POST['page']) ) {  
             $page = $_POST['page'];   
             $page_first_result = ($page-1) * $results_per_page;  
 
-            $quotes = $router->db->getAllQuotes();
-            $number_of_result = count($quotes);  
+ 
             $number_of_page = ceil($number_of_result / $results_per_page); 
             $quotes = $router->db->getQuotesByPage($page_first_result, $results_per_page);
-            $tags = $router->db->getTags();
 
             foreach($quotes as &$value) {
                 $tags_of_quote = $router->db->getTagsForOneQuote($value['id']);
                 $value['tags'] = $tags_of_quote;
             }
-
-            $authors = $router->db->getAuthors();
-            $router->renderView('quotes/index', [
-                'quotes' => $quotes,
-                'authors' => $authors,
-                'tags' => $tags,
-                'page' => $number_of_page,
-                'current_page' => $page
-            ]);
         } else {
             $page = 1;  
             $page_first_result = ($page-1) * $results_per_page;  
-
-            $quotes = $router->db->getAllQuotes();
-            $number_of_result = count($quotes);  
             $number_of_page = ceil($number_of_result / $results_per_page); 
             $quotes = $router->db->getQuotesByPage($page_first_result, $results_per_page);
-            $tags = $router->db->getTags();
 
             foreach($quotes as &$value) {
                 $tags_of_quote = $router->db->getTagsForOneQuote($value['id']);
                 $value['tags'] = $tags_of_quote;
             }
-
-            $authors = $router->db->getAuthors();
-            $router->renderView('quotes/index', [
-                'quotes' => $quotes,
-                'authors' => $authors,
-                'tags' => $tags,
-                'page' => $number_of_page,
-                'current_page' => $page
-            ]);
         }  
+
+        $router->renderView('quotes/index', [
+            'quotes' => $quotes,
+            'authors' => $authors,
+            'tags' => $tags,
+            'page' => $number_of_page,
+            'current_page' => $page
+        ]);
     }
 
     public static function search(Router $router) {

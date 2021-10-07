@@ -17,18 +17,16 @@
                 <div class="card-body">
                     <h6 class="card-text"><?php echo $author['name'] ?></h6>
                     <p class="card-text"><?php echo $author['role'] ?></p>
+
                     <button class="btn btn-sm"
-                        onclick="document.getElementById('editModal<?php echo $author['id'] ?>')
-                        .style.display = 'block'"
-                >
-                    <img src="<?php echo BASE_URL; ?>/pencil-square.svg" alt="">
-                </button>
-                <form method="post" action="/authors/delete" style="display: inline-block">
-                    <input  type="hidden" name="id" value="<?php echo $author['id'] ?>"/>
-                    <button type="submit" class="btn btn-sm">
+                                    onclick="document.getElementById('editModal<?php echo $author['id'] ?>').style.display = 'block'"
+                        >
+                        <img src="<?php echo BASE_URL; ?>/pencil-square.svg" alt="">
+                    </button>
+                    <button class="btn btn-sm" 
+                                    onclick="document.getElementById('deleteModal<?php echo $author['id'] ?>').style.display='block'">
                         <img src="<?php echo BASE_URL; ?>/trash.svg" alt="">
                     </button>
-                </form>
                 </div>
             </div>
         </div>
@@ -51,6 +49,29 @@
             <div>
                 <?php include "edit_form.php"; ?>
             </div> 
+        </div>
+    </div>
+<?php } ?>
+
+
+<?php foreach ($authors as $i => $author) { ?>
+    <div id="deleteModal<?php echo $author['id'] ?>" class="modal">
+        <div class="my-modal-content">
+            <div class="mb-3">
+                <h5 class="mb-0">Διαγραφή</h5>
+            </div>
+
+            <p>Είστε σίγουροι οτι θέλετε να διαγράψετε το πρόσωπο <b><?php echo $author['name'] ?></b>;</p>
+            <button class="btn btn-sm btn-primary" 
+                    onclick="document.getElementById('deleteModal<?php echo $author['id'] ?>').style.display='none'">
+                        Ακύρωση
+            </button>
+            <form method="post" action="/authors/delete" style="display: inline-block">
+                        <input  type="hidden" name="id" value="<?php echo $author['id'] ?>"/>
+                        <button class="btn btn-sm btn-danger" type="submit">
+                            Διαγραφή
+                        </button>
+            </form>
         </div>
     </div>
 <?php } ?>
@@ -80,7 +101,7 @@
                     <label>Ιδιότητα</label>
                     <input type="text" class="form-control" name="role" required maxlength="50"></input>
                 </div>
-                <button type="submit" class="btn btn-primary">Αποθήκευση</button>
+                <button type="submit" class="btn btn-sm btn-primary">Αποθήκευση</button>
             </form>
         </div>
     </div>

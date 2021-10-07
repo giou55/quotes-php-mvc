@@ -17,17 +17,14 @@
                 <div class="card-body d-flex justify-content-center align-items-center">
                     <h6 class="card-text mb-0 mr-4"><?php echo $tag['title'] ?></h6>
                     <button class="btn btn-sm"
-                                onclick="document.getElementById('editModal<?php echo $tag['id'] ?>')
-                                .style.display = 'block'"
+                                onclick="document.getElementById('editModal<?php echo $tag['id'] ?>').style.display = 'block'"
                         >
                         <img src="<?php echo BASE_URL; ?>/pencil-square.svg" alt="">
                     </button>
-                    <form method="post" action="/tags/delete" style="display: inline-block">
-                        <input  type="hidden" name="id" value="<?php echo $tag['id'] ?>"/>
-                        <button type="submit" class="btn btn-sm">
-                            <img src="<?php echo BASE_URL; ?>/trash.svg" alt="">
-                        </button>
-                    </form>
+                    <button class="btn btn-sm" 
+                                onclick="document.getElementById('deleteModal<?php echo $tag['id'] ?>').style.display='block'">
+                        <img src="<?php echo BASE_URL; ?>/trash.svg" alt="">
+                    </button>
                 </div>
             </div>
         </div>
@@ -55,6 +52,29 @@
 <?php } ?>
 
 
+<?php foreach ($tags as $i => $tag) { ?>
+    <div id="deleteModal<?php echo $tag['id'] ?>" class="modal">
+        <div class="my-modal-content">
+            <div class="mb-3">
+                <h5 class="mb-0">Διαγραφή</h5>
+            </div>
+
+            <p>Είστε σίγουροι οτι θέλετε να διαγράψετε το tag <b><?php echo $tag['title'] ?></b>;</p>
+            <button class="btn btn-sm btn-primary" 
+                    onclick="document.getElementById('deleteModal<?php echo $tag['id'] ?>').style.display='none'">
+                        Ακύρωση
+            </button>
+            <form method="post" action="/tags/delete" style="display: inline-block">
+                        <input  type="hidden" name="id" value="<?php echo $tag['id'] ?>"/>
+                        <button class="btn btn-sm btn-danger" type="submit">
+                            Διαγραφή
+                        </button>
+            </form>
+        </div>
+    </div>
+<?php } ?>
+
+
 <div id="tagModal" class="modal">
     <div class="my-modal-content">
         <div class="d-flex flex-row justify-content-between align-items-center mb-3">
@@ -71,7 +91,7 @@
                 <div class="form-group">
                     <input type="text" class="form-control" name="title" required maxlength="20"></input>
                 </div>
-                <button type="submit" class="btn btn-primary">Αποθήκευση</button>
+                <button type="submit" class="btn btn-sm btn-primary">Αποθήκευση</button>
             </form>
         </div>
     </div>

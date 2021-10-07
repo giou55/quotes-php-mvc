@@ -48,12 +48,16 @@
                 </button>
             </td>
             <td>
-                <form method="post" action="/quotes/delete" style="display: inline-block">
+                <button class="btn btn-sm" 
+                        onclick="document.getElementById('deleteModal<?php echo $quote['id'] ?>').style.display='block'">
+                    <img src="<?php echo BASE_URL; ?>/trash.svg" alt="">
+                </button>
+                <!-- <form method="post" action="/quotes/delete" style="display: inline-block">
                     <input  type="hidden" name="id" value="<?php echo $quote['id'] ?>"/>
                     <button type="submit" class="btn btn-sm">
                         <img src="<?php echo BASE_URL; ?>/trash.svg" alt="">
                     </button>
-                </form>
+                </form> -->
             </td>
         </tr>
     <?php } ?>
@@ -88,6 +92,29 @@
             <div>
                 <?php include "edit_form.php"; ?>
             </div> 
+        </div>
+    </div>
+<?php } ?>
+
+
+<?php foreach ($quotes as $i => $quote) { ?>
+    <div id="deleteModal<?php echo $quote['id'] ?>" class="modal">
+        <div class="my-modal-content">
+            <div class="mb-3">
+                <h5 class="mb-0">Διαγραφή</h5>
+            </div>
+            <p>Είστε σίγουροι οτι θέλετε να διαγράψετε το παρακάτω quote;</p>
+            <p><b><?php echo $quote['body'] ?></b></p>
+            <button class="btn btn-sm btn-primary" 
+                    onclick="document.getElementById('deleteModal<?php echo $quote['id'] ?>').style.display='none'">
+                        Ακύρωση
+            </button>
+            <form method="post" action="/quotes/delete" style="display: inline-block">
+                <input  type="hidden" name="id" value="<?php echo $quote['id'] ?>"/>
+                <button class="btn btn-sm btn-danger" type="submit">
+                    Διαγραφή
+                </button>
+            </form>
         </div>
     </div>
 <?php } ?>
@@ -129,7 +156,7 @@
                     <?php endforeach; ?>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Αποθήκευση</button>
+                <button type="submit" class="btn btn-sm btn-primary">Αποθήκευση</button>
             </form>
         </div>
     </div>
