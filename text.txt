@@ -2,3 +2,13 @@ echo '<pre>';
 var_dump($var);
 echo '</pre>';
 exit;
+
+
+
+
+
+
+DirectoryIndex index.php
+RewriteEngine On 
+RewriteRule ^$ public/index.php [L]
+RewriteRule ^((?!public/).*)$ public/index.php [L,NC]
