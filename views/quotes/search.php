@@ -18,71 +18,111 @@
                     }
                 ?>
             </td>
+            <td></td>
             <td>
-                <button class="btn btn-sm btn-outline-primary"
-                        onclick="document.getElementById('myModal<?php echo $quote['id'] ?>')
+                <button class="btn btn-sm"
+                        onclick="document.getElementById('editModal<?php echo $quote['id'] ?>')
                         .style.display = 'block'"
                 >
-                    Edit
+                    <img src="<?php echo BASE_URL; ?>/pencil-square.svg" alt="">
                 </button>
-                <form method="post" action="/quotes/delete" style="display: inline-block">
-                    <input  type="hidden" name="id" value="<?php echo $quote['id'] ?>"/>
-                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
-                </form>
+            </td>
+            <td>
+                <button class="btn btn-sm" 
+                        onclick="document.getElementById('deleteModal<?php echo $quote['id'] ?>').style.display='block'">
+                    <img src="<?php echo BASE_URL; ?>/trash.svg" alt="">
+                </button>
             </td>
         </tr>
     <?php } ?>
 </table>
 
+
 <?php foreach ($quotes as $i => $quote) { ?>
-    <div id="myModal<?php echo $quote['id'] ?>" class="modal">
-        <div class="modal-content">
-            <span class="close"
-                  onclick="document.getElementById('myModal<?php echo $quote['id'] ?>')
-                        .style.display = 'none'"
-                        >
-                            &times;
-            </span>
-            <h4>Επεξεργασία</h4>
-            <?php include "edit_form.php"; ?>
+    <div id="editModal<?php echo $quote['id'] ?>" class="modal">
+        <div class="my-modal-content">
+            <div class="d-flex flex-row justify-content-between align-items-center mb-3">
+                <h5 class="mb-0">Επεξεργασία</h5>
+                <span class="close-btn"
+                    onclick="document.getElementById('editModal<?php echo $quote['id'] ?>')
+                            .style.display = 'none'"
+                            >
+                                &times;
+                </span>
+            </div>
+            <div>
+                <?php include "edit_form.php"; ?>
+            </div> 
         </div>
     </div>
 <?php } ?>
 
-<div id="createModal" class="modal">
-        <div class="modal-content">
-            <span class="close"
-                  onclick="document.getElementById('createModal')
-                        .style.display = 'none'"
-                        >
-                            &times;
-            </span>
-            <h4>Νέο Απόφθεγμα</h4>
-            <?php
-                echo '<pre>';
-                
-                if (isset($errors)) var_dump($errors);
-                echo '</pre>';
-            ?>
 
-            <form method="post" action="/quotes/create">
-              <div class="form-group">
-                <textarea class="form-control" name="body" required maxlength="200"></textarea>
-              </div>
-              <div class="form-group">
-                  <select class="form-control" name="author" required>
-                      <option value="" selected>
-                      </option>
-                      <?php foreach ($authors as $author): ?>
-                          <option value="<?php echo $author['id'].'&'.$author['name'].'&'.$author['role'] ?>">
-                              <?php echo $author['name'] ?>
-                          </option>
-                      <?php endforeach; ?>
-                  </select>
-              </div>
-              <button type="submit" class="btn btn-primary">Αποθήκευση</button>
+<?php foreach ($quotes as $i => $quote) { ?>
+    <div id="deleteModal<?php echo $quote['id'] ?>" class="modal">
+        <div class="my-modal-content">
+            <div class="mb-3">
+                <h5 class="mb-0">Διαγραφή</h5>
+            </div>
+            <p>Είστε σίγουροι οτι θέλετε να διαγράψετε το παρακάτω quote;</p>
+            <p><b><?php echo $quote['body'] ?></b></p>
+            <button class="btn btn-sm btn-primary" 
+                    onclick="document.getElementById('deleteModal<?php echo $quote['id'] ?>').style.display='none'">
+                        Ακύρωση
+            </button>
+            <form method="post" action="/quotes/delete" style="display: inline-block">
+                <input  type="hidden" name="id" value="<?php echo $quote['id'] ?>"/>
+                <button class="btn btn-sm btn-danger" type="submit">
+                    Διαγραφή
+                </button>
             </form>
         </div>
     </div>
+<?php } ?>
+
+
+<div id="createModal" class="modal">
+    <div class="my-modal-content">
+        <div class="d-flex flex-row justify-content-between align-items-center mb-3">
+            <h5 class="mb-0">Νέο Απόφθεγμα</h5>
+            <span class="close-btn"
+                onclick="document.getElementById('createModal')
+                    .style.display = 'none'"
+            >
+                &times;
+            </span>
+        </div>
+        <div>
+            <form method="post" action="/quotes/create">
+                <div class="form-group">
+                    <textarea class="form-control" name="body" required maxlength="200"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <select class="form-control" name="author" required>
+                        <option value="" selected>
+                        </option>
+                        <?php foreach ($authors as $author): ?>
+                            <option value="<?php echo $author['id'].'&'.$author['name'].'&'.$author['role'] ?>">
+                                <?php echo $author['name'] ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                    </div>
+
+                <div class="form-group">
+                    <?php foreach ($tags as $tag): ?>
+                        <input type="checkbox" name="tags[]" value="<?php echo $tag['id']; ?>">
+                        <label class="mr-3"><?php echo $tag['title']; ?></label>
+                    <?php endforeach; ?>
+                </div>
+
+                <button type="submit" class="btn btn-sm btn-primary">Αποθήκευση</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 
 
