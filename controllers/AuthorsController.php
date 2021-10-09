@@ -2,6 +2,7 @@
 
 require_once "../Router.php";
 require_once "../models/Author.php";
+require_once "../functions.php";
 
 class AuthorsController {
     public static function index(Router $router) {
@@ -19,9 +20,9 @@ class AuthorsController {
             'keyword' => '',
             'role' => ''
         ];
-        $authorData['name'] = $_POST['name'];
-        $authorData['keyword'] = $_POST['keyword'];
-        $authorData['role'] = $_POST['role'];
+        $authorData['name'] = validate_input($_POST['name']);
+        $authorData['keyword'] = validate_input($_POST['keyword']);
+        $authorData['role'] = validate_input($_POST['role']);
 
         $author = new Author();
         $author->load($authorData);
@@ -45,9 +46,9 @@ class AuthorsController {
             'role' => ''
         ];
         $authorData['id'] = $id;
-        $authorData['name'] = $_POST['name'];
-        $authorData['keyword'] = $_POST['keyword'];
-        $authorData['role'] = $_POST['role'];
+        $authorData['name'] = validate_input($_POST['name']);
+        $authorData['keyword'] = validate_input($_POST['keyword']);
+        $authorData['role'] = validate_input($_POST['role']);
 
         $author = new Author();
         $author->load($authorData);

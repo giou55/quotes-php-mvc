@@ -20,8 +20,6 @@ class Database {
 
     public function getQuotesByPage($page_first_result, $results_per_page) {
         $statement = $this->pdo->prepare('SELECT * FROM quotes LIMIT ' . $page_first_result . ',' . $results_per_page);
-        // $statement->bindValue(':page', $page_first_result);
-        //$statement->bindValue(':results', $results_per_page);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }

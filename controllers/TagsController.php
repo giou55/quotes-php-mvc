@@ -2,6 +2,7 @@
 
 require_once "../Router.php";
 require_once "../models/Tag.php";
+require_once "../functions.php";
 
 class TagsController {
     public static function index(Router $router) {
@@ -17,7 +18,7 @@ class TagsController {
         $tagData = [
             'title' => ''
         ];
-        $tagData['title'] = $_POST['title'];
+        $tagData['title'] = validate_input($_POST['title']);
 
         $tag = new Tag();
         $tag->load($tagData);
@@ -39,7 +40,7 @@ class TagsController {
             'title' => ''
         ];
         $tagData['id'] = $id;
-        $tagData['title'] = $_POST['title'];
+        $tagData['title'] = validate_input($_POST['title']);
 
         $tag = new Tag();
         $tag->load($tagData);

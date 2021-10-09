@@ -1,10 +1,5 @@
 <?php
 
-require_once "../controllers/AuthorsController.php";
-require_once "../controllers/QuotesController.php";
-require_once "../controllers/TagsController.php";
-require_once "Database.php";
-
 class Router {
     public array $getRoutes = [];
     public array $postRoutes = [];

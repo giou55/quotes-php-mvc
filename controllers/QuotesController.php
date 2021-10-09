@@ -2,6 +2,7 @@
 
 require_once "../Router.php";
 require_once "../models/Quote.php";
+require_once "../functions.php";
 
 class QuotesController {
     public static function index(Router $router) {
@@ -46,7 +47,7 @@ class QuotesController {
 
     public static function search(Router $router) {
         if (isset($_POST['search'])) {
-           $search = $_POST['search'] ?? '';
+           $search = validate_input($_POST['search']) ?? '';
             $quotes = $router->db->searchQuotes($search);
 
             $tags = $router->db->getTags();
@@ -64,7 +65,7 @@ class QuotesController {
             ]); 
         }
         if (isset($_POST['author'])) {
-            $author = $_POST['author'] ?? '';
+            $author = validate_input($_POST['author']) ?? '';
             if ($author === "all") {
                 $quotes = $router->db->getAllQuotes();
             } else {
@@ -92,7 +93,7 @@ class QuotesController {
         }
 
         if (isset($_POST['tag'])) {
-            $tag = $_POST['tag'] ?? '';
+            $tag = validate_input($_POST['tag']) ?? '';
             if ($tag === "all") {
                 $quotes = $router->db->getAllQuotes();
             } else {
@@ -139,7 +140,7 @@ class QuotesController {
         $quoteData['author_id'] = $author_id;
         $quoteData['author_name'] = $author_name;
         $quoteData['author_role'] = $author_role;
-        $quoteData['body'] = $_POST['body'];
+        $quoteData['body'] = validate_input($_POST['body']);
         $quoteData['tags'] = $_POST['tags'];
 
         $quote = new Quote();
@@ -174,7 +175,7 @@ class QuotesController {
         $quoteData['author_id'] = $author_id;
         $quoteData['author_name'] = $author_name;
         $quoteData['author_role'] = $author_role;
-        $quoteData['body'] = $_POST['body'];
+        $quoteData['body'] = validate_input($_POST['body']);
         $quoteData['tags'] = $_POST['tags'];
 
         $quote = new Quote();
