@@ -72,7 +72,7 @@
 
 
 <?php foreach ($quotes as $i => $quote) { ?>
-    <div id="editModal<?php echo $quote['id'] ?>" class="modal">
+    <div id="editModal<?php echo $quote['id'] ?>" class="my-modal">
         <div class="my-modal-content">
             <div class="d-flex flex-row justify-content-between align-items-center mb-3">
                 <h5 class="mb-0">Επεξεργασία</h5>
@@ -92,7 +92,7 @@
 
 
 <?php foreach ($quotes as $i => $quote) { ?>
-    <div id="deleteModal<?php echo $quote['id'] ?>" class="modal">
+    <div id="deleteModal<?php echo $quote['id'] ?>" class="my-modal">
         <div class="my-modal-content">
             <div class="mb-3">
                 <h5 class="mb-0">Διαγραφή</h5>
@@ -114,7 +114,7 @@
 <?php } ?>
 
 
-<div id="createModal" class="modal">
+<div id="createModal" class="my-modal">
     <div class="my-modal-content">
         <div class="d-flex flex-row justify-content-between align-items-center mb-3">
             <h5 class="mb-0">Νέο Απόφθεγμα</h5>

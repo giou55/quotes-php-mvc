@@ -35,7 +35,7 @@
 
 
 <?php foreach ($authors as $i => $author) { ?>
-    <div id="editModal<?php echo $author['id'] ?>" class="modal">
+    <div id="editModal<?php echo $author['id'] ?>" class="my-modal">
         <div class="my-modal-content">
             <div class="d-flex flex-row justify-content-between align-items-center mb-3">
                 <h5 class="mb-0">Επεξεργασία</h5>
@@ -55,7 +55,7 @@
 
 
 <?php foreach ($authors as $i => $author) { ?>
-    <div id="deleteModal<?php echo $author['id'] ?>" class="modal">
+    <div id="deleteModal<?php echo $author['id'] ?>" class="my-modal">
         <div class="my-modal-content">
             <div class="mb-3">
                 <h5 class="mb-0">Διαγραφή</h5>
